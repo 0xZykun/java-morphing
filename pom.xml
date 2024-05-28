@@ -121,9 +121,9 @@
               <executable>jlink</executable>
               <arguments>
                 <argument>--module-path</argument>
-                <argument>/home/anthony/Java-JDK/jdk-17_linux-x64_bin/jdk-17.0.11/jmods</argument>
+                <argument>${project.basedir}/jdk/jdk-17.0.11/jmods</argument>
                 <argument>--add-modules</argument>
-                <argument>java.base,javafx.fxml,javafx.controls,javafx.media</argument>
+                <argument>java.base,javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media,javafx.swing</argument>
                 <argument>--output</argument>
                 <argument>${project.build.directory}/custom-jre</argument>
               </arguments>
