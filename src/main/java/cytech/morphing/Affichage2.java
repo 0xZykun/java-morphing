@@ -26,13 +26,15 @@ public class Affichage2 extends Application {
 
 	@Override
 	public void start( Stage primaryStage) throws Exception{
+		//Récupération du répertoire actuel
+		String currentPath = new java.io.File(".").getCanonicalPath();
 		
 		primaryStage.setTitle("Morphing");
 		int RAYON_POINT =3;
 		System.out.println();
-		ImageBit imageDebut = new ImageBit("./src/main/resources/images/cross.png");
-		ImageBit imageIntermediaire = new ImageBit("./src/main/resources/images/cross.png"); // A l'étape 0 l'image Intermédiaire = imageDebut
-		ImageBit imageFin = new ImageBit("./src/main/resources/images/square.png");
+		ImageBit imageDebut = new ImageBit(currentPath + "/src/main/resources/images/cross.png");
+		ImageBit imageIntermediaire = new ImageBit(currentPath + "/src/main/resources/images/cross.png"); // A l'étape 0 l'image Intermédiaire = imageDebut
+		ImageBit imageFin = new ImageBit(currentPath + "/src/main/resources/images/square.png");
 
 		// couleur fond 
 		double[] cPixelsFond1 = imageDebut.getRGBA(0,0);
