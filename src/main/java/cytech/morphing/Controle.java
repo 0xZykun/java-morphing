@@ -61,8 +61,8 @@ public class Controle {
                     pointsValideeGauche = Point.deepCopy(app.getPointControle().getPointsGauche());
                     pointsValideeDroite = Point.deepCopy(app.getPointControle().getPointsDroite());
 
-                    pointsValideeGauche = app.adjusterPointsAOriginal(app.getPointControle().getPointsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
-                    pointsValideeDroite = app.adjusterPointsAOriginal(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    pointsValideeGauche = app.ajusterPointsAOriginal(app.getPointControle().getPointsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    pointsValideeDroite = app.ajusterPointsAOriginal(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
 
                     app.getMorphingTask().morphing1(pointsValideeGauche, pointsValideeDroite, app.getImagesOrigines().get(0), app.getImagesOrigines().get(1));                    
                     break;
@@ -70,14 +70,14 @@ public class Controle {
                     pointsValideeGauche = Point.deepCopy(app.getPointControle().getPointsGauche());
                     pointsValideeDroite = Point.deepCopy(app.getPointControle().getPointsDroite());
 
-                    pointsValideeGauche = app.adjusterPointsAOriginal(app.getPointControle().getPointsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
-                    pointsValideeDroite = app.adjusterPointsAOriginal(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    pointsValideeGauche = app.ajusterPointsAOriginal(app.getPointControle().getPointsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    pointsValideeDroite = app.ajusterPointsAOriginal(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
 
                     app.getMorphingTask().morphing2(pointsValideeGauche, pointsValideeDroite, app.getImagesOrigines().get(0), app.getImagesOrigines().get(1));    
                     break;
                 case 3:
-                    pointsValideeGauche = app.adjusterPointsAOriginal(app.getPointControle().getPointsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
-                    pointsValideeDroite = app.adjusterPointsAOriginal(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    pointsValideeGauche = app.ajusterPointsAOriginal(app.getPointControle().getPointsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    pointsValideeDroite = app.ajusterPointsAOriginal(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
 
                     List<Triangle> trianglesValideeGauche = Triangle.deepCopy(app.getTriangleControle().getListeTriangleGauche());
                     List<Triangle> trianglesValideeDroite = Triangle.deepCopy(app.getTriangleControle().getListeTriangleDroite());
@@ -86,8 +86,8 @@ public class Controle {
                     app.getPointControle().ajouterPointsBordure(app.getPointControle().getPointsDroite(), app.getImageLoader().getCanevasDroite());
                     app.getTriangleControle().generateDelaunayTriangles();
 
-                    trianglesValideeGauche = app.adjustTrianglesToOriginal(app.getTriangleControle().getListeTriangleGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
-                    trianglesValideeDroite = app.adjustTrianglesToOriginal(app.getTriangleControle().getListeTriangleDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    trianglesValideeGauche = app.ajusterTrianglesAOriginal(app.getTriangleControle().getListeTriangleGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    trianglesValideeDroite = app.ajusterTrianglesAOriginal(app.getTriangleControle().getListeTriangleDroite(), app.getImageLoader().getCanevasDroite().getWidth(), app.getImageLoader().getCanevasDroite().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
 
                     app.getMorphingTask().morphing3(trianglesValideeGauche, trianglesValideeDroite);
                     break;
