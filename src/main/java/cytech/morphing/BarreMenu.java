@@ -17,7 +17,9 @@ public class BarreMenu {
         Menu menuOptions = new Menu("Options");
         MenuItem menuItemOptions = new MenuItem("Configurer GIF");
         menuItemOptions.setOnAction(e -> app.ouvrirDialogueOptions());
-        menuOptions.getItems().add(menuItemOptions);
+
+        MenuItem menuHelp = new MenuItem("Help");
+        menuOptions.getItems().addAll(menuItemOptions, menuHelp);
 
         /*Menu menuPreferences = new Menu("Préférences");
         MenuItem menuItemPreferences = new MenuItem("Style et Apparence");

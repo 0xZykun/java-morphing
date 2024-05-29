@@ -222,4 +222,43 @@ public class Point {
 		
 		return haut && droite && bas && gauche ;
 	}
+
+	/**
+	 * Methode qui calcule la distance depuis le point courant jusqu'à un segment en paramètre
+	 * @param s : segment jusqu'auquel on veut calculer la distance
+	 * @return : double qui contient la distance
+	 */	
+	public double distanceSegment(Segment s)
+	{
+		// calcul du projeté orthogonal du point courant sur la droite portée par s
+		Point v = Point.soustraction(s.getB(),s.getA());
+		v = Point.scale(v,1/v.norme2());
+		Point u = Point.soustraction(this,s.getA());
+		Point h = Point.scale(v,Point.scalaire(u,v));
+		h = Point.addition(h, s.getA());
+
+		//calcul de la distance au Segment s
+		if(h.distance(s.getA()) > s.getLongueur())
+		{
+			return distance(s.getB());
+		}
+		else
+		{	
+			if(h.distance(s.getB()) > s.getLongueur())
+			{
+				return distance(s.getA());
+			} else { return distance(h); }
+		}
+		
+	}
+
+	/**
+	 * Methode qui multiplie un point par un scalaire
+	 * @param p : Point que l'on veut mettre à l'échelle
+	 * @return point resultat de la multiplication de p par x
+	 */		
+	public static Point scale(Point p,double x)
+	{
+		return new Point(p.getX()*x,p.getY()*x);
+	}
 }

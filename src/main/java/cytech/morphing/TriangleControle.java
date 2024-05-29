@@ -75,7 +75,7 @@ public class TriangleControle {
 
     private void dessinerPoints(GraphicsContext gc, List<Point> points) {
         List<Color> couleurs = ColorGenerateur.genererCouleursDifferentes(15);
-    
+
         for (int i = 0; i < points.size(); i++) {
             Point point = points.get(i);
             Color couleur;
@@ -84,18 +84,17 @@ public class TriangleControle {
             } else {
                 couleur = couleurs.get(i / 3 % couleurs.size());
             }
-    
+
             gc.setFill(couleur);
             gc.fillOval(point.getX() - 5, point.getY() - 5, 10, 10);
         }
     }
-    
 
     public void mettreAJourTrianglesEtDessiner() {
-        if (app.getPointControle().getPointsGauche().size() >= 3 && app.getPointControle().getPointsDroite().size() >= 3) {
+        if (app.getPointControle().getPointsGauche().size() >= 3) {
             generateDelaunayTriangles();
         }
-    
+
         redessinerCanevas(app.getImageLoader().getCanevasGauche(), app.getPointControle().getPointsGauche(), app.getImageLoader().getImageGauche());
         redessinerCanevas(app.getImageLoader().getCanevasDroite(), app.getPointControle().getPointsDroite(), app.getImageLoader().getImageDroite());
     }

@@ -21,6 +21,7 @@ public class MorphingFx extends Application {
     private double hauteurScene;
     private ImageLoader imageLoader;
     private PointControle pointControle;
+    private SegmentControle segmentControle;
     private TriangleControle triangleControle;
     private ImageViewer imageViewer;
     private MorphingTask morphingTask;
@@ -32,7 +33,7 @@ public class MorphingFx extends Application {
     private int hauteurImageOriginale = 0;
     private boolean estCycle = true;
     private int nombreImages = 2;
-    private int nombreImagesIntermediaires = 20;
+    private int nombreImagesIntermediaires = 8;
     private int dureeDuGIF = 3;
     private List<ImageBit> imagesOrigines = new ArrayList<>();
     private int choixMethode = 3;
@@ -50,6 +51,7 @@ public class MorphingFx extends Application {
         BarreMenu menu = new BarreMenu(this);
         imageLoader = new ImageLoader(this);
         pointControle = new PointControle(this);
+        segmentControle = new SegmentControle(this);
         triangleControle = new TriangleControle(this);
         imageViewer = new ImageViewer(this);
         morphingTask = new MorphingTask(this);
@@ -144,8 +146,19 @@ public class MorphingFx extends Application {
                     estCycle = cycleCheckBox.isSelected();
                     
                     controle.miseJourControle(choixMethode);
+
+                    if (choixMethode == 4) {
+                        this.getSegmentControle().configurerCanevasSegment(this.getImageLoader().getCanevasGauche(), this.getSegmentControle().getSegmentsGauche(), this.getImageLoader().getCanevasDroite(), this.getSegmentControle().getSegmentsDroite());
+                        this.getSegmentControle().configurerCanevasSegment(this.getImageLoader().getCanevasDroite(), this.getSegmentControle().getSegmentsDroite(), this.getImageLoader().getCanevasGauche(), this.getSegmentControle().getSegmentsGauche());
+                        segmentControle.clearSegments();
+                    } else {
+                        this.getPointControle().configurerCanevas(this.getImageLoader().getCanevasGauche(), this.getPointControle().getPointsGauche(), this.getImageLoader().getCanevasDroite(), this.getPointControle().getPointsDroite());
+                        this.getPointControle().configurerCanevas(this.getImageLoader().getCanevasDroite(), this.getPointControle().getPointsDroite(), this.getImageLoader().getCanevasGauche(), this.getPointControle().getPointsGauche());
+                    }
                     
+
                     pointControle.clearPoints();
+                    imageLoader.actualiserEtatBoutons();
                 } catch (NumberFormatException e) {
                     System.out.println("Erreur : L'un des champs contient des données non valides.");
                 }
@@ -277,6 +290,23 @@ public class MorphingFx extends Application {
         return adjusteTriangles;
     }
 
+    public List<Segment> adjusterSegmentsAOriginal(List<Segment> segments, double canvasWidth, double canvasHeight, double originalWidth, double originalHeight) {
+        List<Segment> adjusteSegments = new ArrayList<>();
+        double scaleX = originalWidth / canvasWidth;
+        double scaleY = originalHeight / canvasHeight;
+
+        for (Segment segment : segments) {
+            double ax = segment.getA().getX() * scaleX;
+            double ay = segment.getA().getY() * scaleY;
+            double bx = segment.getB().getX() * scaleX;
+            double by = segment.getB().getY() * scaleY;
+
+            Segment newSegment = new Segment(new Point(ax, ay), new Point(bx, by));
+            adjusteSegments.add(newSegment);
+        }
+        return adjusteSegments;
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -295,6 +325,10 @@ public class MorphingFx extends Application {
 
     public PointControle getPointControle() {
         return pointControle;
+    }
+
+    public SegmentControle getSegmentControle() {
+        return segmentControle;
     }
 
     public TriangleControle getTriangleControle() {

@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,12 +20,13 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.embed.swing.SwingFXUtils;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -252,6 +254,55 @@ public class MorphingTask {
         new Thread(tacheMorphing).start();
     }
 
+    public void morphing4(List<Segment> segementsGauche, List<Segment> segmentsDroite, ImageBit imageGauche, ImageBit imageDroite) {
+        app.getImagesIntermediaires().clear();
+        int nombreEtapes = app.getNombreImagesIntermediaires();
+        double coeff = (double) 1 / nombreEtapes;
+        System.out.println(coeff);
+        double dureeEtape = app.getDureeDuGIF() * 1000 / nombreEtapes;
+    
+        ImageView vueImage = new ImageView();
+        vueImage.setPreserveRatio(true);
+    
+        ProgressBar barreProgression = creerBarreProgression();
+        Stage barreProgressionStage = creerStageProgression(barreProgression);
+    
+        Task<Void> tacheMorphing = new Task<>() {
+            @Override
+            public Void call() throws Exception {
+    
+                FieldMorphing fieldMorphing = new FieldMorphing(convertirListeEnTableau(segementsGauche), convertirListeEnTableau(segmentsDroite));
+    
+                for (int etape = 0; etape <= nombreEtapes; etape++) {
+
+                    ImageBit imageIntermediaire = new ImageBit(imageGauche.getImg());
+                    fieldMorphing.morph(imageGauche, imageDroite, imageIntermediaire, etape * coeff);
+    
+                    Platform.runLater(() -> {
+                        app.getImagesIntermediaires().add(imageIntermediaire);
+                    });
+
+                    updateProgress(etape + 1, nombreEtapes);
+                }
+                app.getImageViewer().actualiserVisionneuseImage();
+                return null;
+            }
+    
+            @Override
+            public void succeeded() {
+                barreProgressionStage.close();
+                afficherApercuAnimation(vueImage, nombreEtapes, dureeEtape);
+            }
+        };
+    
+        barreProgression.progressProperty().bind(tacheMorphing.progressProperty());
+        new Thread(tacheMorphing).start();
+    }
+
+    public Segment[] convertirListeEnTableau(List<Segment> segmentsList) {
+        return segmentsList.toArray(new Segment[0]);
+    }    
+
     private ProgressBar creerBarreProgression() {
         ProgressBar barreProgression = new ProgressBar(0);
         barreProgression.setMaxWidth(Double.MAX_VALUE);
@@ -327,14 +378,20 @@ public class MorphingTask {
         MenuItem menuItemTelecharger = new MenuItem("Télécharger");
 
         menuItemTelecharger.setOnAction(e -> {
-            try {
-                LinkedList<BufferedImage> bufferedImages = new LinkedList<>();
-                for (ImageBit imageBit : app.getImagesIntermediaires()) {
-                    bufferedImages.add(SwingFXUtils.fromFXImage(imageBit.getImg(), null));
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Enregistrer le GIF");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("GIF Files", "*.gif"));
+            File file = fileChooser.showSaveDialog(popupStage);
+            if (file != null) {
+                try {
+                    LinkedList<BufferedImage> bufferedImages = new LinkedList<>();
+                    for (ImageBit imageBit : app.getImagesIntermediaires()) {
+                        bufferedImages.add(SwingFXUtils.fromFXImage(imageBit.getImg(), null));
+                    }
+                    GifSequenceWriter.generateGif(bufferedImages, file.getAbsolutePath(), (int) dureeEtape, app.isEstCycle());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-                GifSequenceWriter.generateGif(bufferedImages, "gif.GIF", (int) dureeEtape, app.isEstCycle());
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
         });
 
@@ -353,16 +410,21 @@ public class MorphingTask {
         double nouvelleLargeur = largeurOriginale;
         double nouvelleHauteur = hauteurOriginale;
 
-        if (largeurOriginale > screenWidth || hauteurOriginale > screenHeight) {
+        // Ajustez les dimensions de l'image en fonction de l'écran
+        if (largeurOriginale > screenWidth * 0.8) {
             nouvelleLargeur = screenWidth * 0.8;
             nouvelleHauteur = nouvelleLargeur / aspectRatio;
-            if (nouvelleHauteur > screenHeight * 0.8) {
-                nouvelleHauteur = screenHeight * 0.8;
-                nouvelleLargeur = nouvelleHauteur * aspectRatio;
-            }
+        }
+        if (nouvelleHauteur > screenHeight * 0.8 - barreMenu.getHeight()) {
+            nouvelleHauteur = screenHeight * 0.8 - barreMenu.getHeight();
+            nouvelleLargeur = nouvelleHauteur * aspectRatio;
         }
 
-        Scene popupScene = new Scene(racine, nouvelleLargeur, nouvelleHauteur);
+        vueImage.setFitWidth(nouvelleLargeur);
+        vueImage.setFitHeight(nouvelleHauteur);
+
+        // Initialement, définissez la taille de la scène pour inclure la hauteur de la barre de menus et éviter que l'image soit coupée
+        Scene popupScene = new Scene(racine, nouvelleLargeur, nouvelleHauteur + barreMenu.getHeight() + 20); // +20 pour tout autre espace supplémentaire
         popupStage.setScene(popupScene);
 
         popupScene.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -370,7 +432,7 @@ public class MorphingTask {
         });
 
         popupScene.heightProperty().addListener((obs, oldVal, newVal) -> {
-            vueImage.setFitHeight(newVal.doubleValue());
+            vueImage.setFitHeight(newVal.doubleValue() - barreMenu.getHeight() - 20); // -20 pour tout autre espace supplémentaire
         });
 
         Timeline chronologie = new Timeline();
@@ -386,7 +448,8 @@ public class MorphingTask {
         chronologie.play();
         popupStage.show();
     }
-
+  
+    
     private static Color getCouleurPlusFrequenteDansForme(PixelReader pixelReader, Image image, List<Point> points, Color couleurFond) {
         Map<Color, Integer> compteurCouleurs = new HashMap<>();
 

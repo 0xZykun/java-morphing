@@ -13,7 +13,9 @@ public class Controle {
     private MorphingFx app;
     private VBox boxControle;
     private Button boutonAjouter;
+    private Button boutonAjouterSegment;
     private Button boutonSupprimer;
+    private Button boutonSupprimerSegment;
     private Button boutonValider;
     private CheckBox afficherTrianglesCheckbox;
     private CheckBox finirForme;
@@ -29,6 +31,18 @@ public class Controle {
         couleurLignes.setOnAction(e -> app.getTriangleControle().mettreAJourTrianglesEtDessiner());
 
         couleurPoints = new ColorPicker(Color.BLACK);
+
+        boutonAjouterSegment = new Button("Ajouter Segment");
+        boutonAjouterSegment.setOnAction(e -> {
+            app.getSegmentControle().ajouterSegment();
+            app.getSegmentControle().resetPointTemp();
+        });
+
+        boutonSupprimerSegment = new Button("Supprimer Segment");
+        boutonSupprimerSegment.setOnAction(e -> {
+            app.getSegmentControle().supprimerSegment();
+            app.getSegmentControle().resetPointTemp();
+        });
 
         boutonAjouter = new Button("Ajouter Point");
         boutonAjouter.setOnAction(e -> app.getPointControle().ajouterPointCentre());
@@ -78,7 +92,10 @@ public class Controle {
                     app.getMorphingTask().morphing3(trianglesValideeGauche, trianglesValideeDroite);
                     break;
                 case 4:
-                    // Code for method 4
+                    List<Segment> segmentsValideeGauche = app.adjusterSegmentsAOriginal(app.getSegmentControle().getSegmentsGauche(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+                    List<Segment> segmentsValideeDroite = app.adjusterSegmentsAOriginal(app.getSegmentControle().getSegmentsDroite(), app.getImageLoader().getCanevasGauche().getWidth(), app.getImageLoader().getCanevasGauche().getHeight(), app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
+
+                    app.getMorphingTask().morphing4(segmentsValideeGauche, segmentsValideeDroite, app.getImagesOrigines().get(0), app.getImagesOrigines().get(1));
                     break;
             }
 
@@ -98,53 +115,70 @@ public class Controle {
 
     public void miseJourControle(int methode) {
         boxControle.getChildren().clear();
-        if (methode == 3) {
-            if (afficherTrianglesCheckbox == null) {
-                afficherTrianglesCheckbox = new CheckBox("Afficher triangles");
-                afficherTrianglesCheckbox.setSelected(true);
-                afficherTrianglesCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
-                    app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasGauche(), app.getPointControle().getPointsGauche(), app.getImageLoader().getImageGauche());
-                    app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasDroite(), app.getPointControle().getPointsDroite(), app.getImageLoader().getImageDroite());
-                });
-            }
-            boxControle.getChildren().addAll(boutonAjouter, boutonSupprimer, afficherTrianglesCheckbox, new Label("Couleur des lignes :"), couleurLignes, boutonValider);
-        } else if (methode == 2) {
-            if (couleurPoints == null) {
-                couleurPoints = new ColorPicker(Color.BLACK);
-                couleurPoints.setOnAction(e -> app.getTriangleControle().mettreAJourTrianglesEtDessiner());
-            }
-            if (finirForme == null) {
-                finirForme = new CheckBox("Finir forme");
-                finirForme.setSelected(false);
-                finirForme.selectedProperty().addListener((observable, oldValue, newValue) -> {
-                    if (newValue) {
-                        CourbeBezier.finirForme(app.getPointControle().getPointsGauche(), app.getPointControle().getPointsDroite());
-                        app.getImageLoader().actualiserEtatBoutons();
-                    } else {
-                        List<Point> pointsGauche = app.getPointControle().getPointsGauche();
-                        List<Point> pointsDroite = app.getPointControle().getPointsDroite();
 
-                        pointsGauche.remove(pointsGauche.size() - 1);
-                        pointsDroite.remove(pointsDroite.size() - 1);
-                        pointsGauche.remove(pointsGauche.size() - 1);
-                        pointsDroite.remove(pointsDroite.size() - 1);
-
-                        app.getPointControle().setPointsGauche(pointsGauche);
-                        app.getPointControle().setPointsDroite(pointsDroite);
-                    }
-                    app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasGauche(), app.getPointControle().getPointsGauche(), app.getImageLoader().getImageGauche());
-                    app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasDroite(), app.getPointControle().getPointsDroite(), app.getImageLoader().getImageDroite());
-                    app.getImageLoader().actualiserEtatBoutons();
-                });
-            }
-            boxControle.getChildren().addAll(boutonAjouter, boutonSupprimer, new Label("Couleur des lignes :"), couleurLignes, new Label("Couleur des points Béziers :"), couleurPoints, finirForme, boutonValider);
-        } else {
+        switch (methode) {
+            case 1:
             boxControle.getChildren().addAll(boutonAjouter, boutonSupprimer, new Label("Couleur des lignes :"), couleurLignes, boutonValider);
+                break;
+                case 2:
+                if (couleurPoints == null) {
+                    couleurPoints = new ColorPicker(Color.BLACK);
+                    couleurPoints.setOnAction(e -> app.getTriangleControle().mettreAJourTrianglesEtDessiner());
+                }
+                if (finirForme == null) {
+                    finirForme = new CheckBox("Finir forme");
+                    finirForme.setSelected(false);
+                    finirForme.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                        if (newValue) {
+                            CourbeBezier.finirForme(app.getPointControle().getPointsGauche(), app.getPointControle().getPointsDroite());
+                            app.getImageLoader().actualiserEtatBoutons();
+                        } else {
+                            List<Point> pointsGauche = app.getPointControle().getPointsGauche();
+                            List<Point> pointsDroite = app.getPointControle().getPointsDroite();
+        
+                            pointsGauche.remove(pointsGauche.size() - 1);
+                            pointsDroite.remove(pointsDroite.size() - 1);
+                            pointsGauche.remove(pointsGauche.size() - 1);
+                            pointsDroite.remove(pointsDroite.size() - 1);
+        
+                            app.getPointControle().setPointsGauche(pointsGauche);
+                            app.getPointControle().setPointsDroite(pointsDroite);
+                        }
+                        app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasGauche(), app.getPointControle().getPointsGauche(), app.getImageLoader().getImageGauche());
+                        app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasDroite(), app.getPointControle().getPointsDroite(), app.getImageLoader().getImageDroite());
+                        app.getImageLoader().actualiserEtatBoutons();
+                    });
+                }
+                boxControle.getChildren().addAll(boutonAjouter, boutonSupprimer, new Label("Couleur des lignes :"), couleurLignes, new Label("Couleur des points Béziers :"), couleurPoints, finirForme, boutonValider);
+                break;
+            case 3:
+                if (afficherTrianglesCheckbox == null) {
+                    afficherTrianglesCheckbox = new CheckBox("Afficher triangles");
+                    afficherTrianglesCheckbox.setSelected(true);
+                    afficherTrianglesCheckbox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                        app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasGauche(), app.getPointControle().getPointsGauche(), app.getImageLoader().getImageGauche());
+                        app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasDroite(), app.getPointControle().getPointsDroite(), app.getImageLoader().getImageDroite());
+                    });
+                }
+                boxControle.getChildren().addAll(boutonAjouter, boutonSupprimer, afficherTrianglesCheckbox, new Label("Couleur des lignes :"), couleurLignes, boutonValider);
+                break;
+            
+            case 4:
+                boxControle.getChildren().addAll(boutonAjouterSegment, boutonSupprimerSegment, boutonValider);
+                break;
         }
     }
 
     public VBox getBoxControle() {
         return boxControle;
+    }
+
+    public Button getBoutonAjouterSegment() {
+        return boutonAjouterSegment;
+    }
+
+    public Button getBoutonSupprimerSegment() {
+        return boutonSupprimerSegment;
     }
 
     public Button getBoutonAjouter() {

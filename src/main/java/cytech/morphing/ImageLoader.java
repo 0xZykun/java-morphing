@@ -64,12 +64,19 @@ public class ImageLoader {
         panneauBord.setTop(hBox);
         panneauBord.setCenter(canevas);
 
-        if (estGauche) {
-            app.getPointControle().configurerCanevas(canevas, app.getPointControle().getPointsGauche(), canevasDroite, app.getPointControle().getPointsDroite());
+        if (app.getChoixMethode() == 4) {
+            if (estGauche) {
+                app.getSegmentControle().configurerCanevasSegment(canevas, app.getSegmentControle().getSegmentsGauche(), canevasDroite, app.getSegmentControle().getSegmentsDroite());
+            } else {
+                app.getSegmentControle().configurerCanevasSegment(canevasDroite, app.getSegmentControle().getSegmentsDroite(), canevas, app.getSegmentControle().getSegmentsGauche());
+            }
         } else {
-            app.getPointControle().configurerCanevas(canevasDroite, app.getPointControle().getPointsDroite(), canevas, app.getPointControle().getPointsGauche());
+            if (estGauche) {
+                app.getPointControle().configurerCanevas(canevas, app.getPointControle().getPointsGauche(), canevasDroite, app.getPointControle().getPointsDroite());
+            } else {
+                app.getPointControle().configurerCanevas(canevasDroite, app.getPointControle().getPointsDroite(), canevas, app.getPointControle().getPointsGauche());
+            }
         }
-
         return panneauBord;
     }
 
@@ -245,17 +252,28 @@ public class ImageLoader {
     }
 
     public void actualiserEtatBoutons() {
-        //app.getControle().getBoutonAjouter().setDisable(!(imageChargeeGauche && imageChargeeDroite) || app.getControle().getFinirForme().isSelected());
-        //app.getControle().getBoutonSupprimer().setDisable(app.getPointControle().getPointsGauche().isEmpty() || app.getControle().getFinirForme().isSelected());
+        if (app.getChoixMethode() == 4) {
+            System.out.println(app.getSegmentControle().getSegmentsDroite());
+            app.getControle().getBoutonAjouterSegment().setDisable(!(imageChargeeGauche && imageChargeeDroite));
+            app.getControle().getBoutonSupprimerSegment().setDisable(app.getSegmentControle().getSegmentsDroite().isEmpty());
+            app.getControle().getBoutonValider().setDisable(app.getSegmentControle().getSegmentsDroite().isEmpty());
+        } else {
+            if (app.getChoixMethode() == 2) {
+                app.getControle().getBoutonAjouter().setDisable(!(imageChargeeGauche && imageChargeeDroite) || app.getControle().getFinirForme().isSelected());
+                app.getControle().getBoutonSupprimer().setDisable(app.getPointControle().getPointsGauche().isEmpty() || app.getControle().getFinirForme().isSelected());
+                app.getControle().getFinirForme().setDisable(!(imageChargeeGauche && imageChargeeDroite) || app.getPointControle().getPointsGauche().size() < 4);
+                app.getControle().getBoutonValider().setDisable((app.getPointControle().getPointsGauche().size() < 4) || !app.getControle().getFinirForme().isSelected());
+            } else {
+                app.getControle().getAfficherTrianglesCheckbox().setDisable(!(imageChargeeGauche && imageChargeeDroite) && (app.getPointControle().getPointsGauche().size() < 3));
+                app.getControle().getBoutonAjouter().setDisable(!(imageChargeeGauche && imageChargeeDroite));
+                app.getControle().getBoutonSupprimer().setDisable(app.getPointControle().getPointsGauche().isEmpty());
+                app.getControle().getBoutonValider().setDisable(app.getPointControle().getPointsGauche().isEmpty());
+            }
+        }
         boutonImporterGauche.setDisable(imageChargeeGauche);
         boutonImporterDroite.setDisable(imageChargeeDroite);
         boutonEffacerGauche.setDisable(!imageChargeeGauche);
         boutonEffacerDroite.setDisable(!imageChargeeDroite);
-        if (app.getChoixMethode() == 2) {
-            //app.getControle().getFinirForme().setDisable(!(imageChargeeGauche && imageChargeeDroite) || app.getPointControle().getPointsGauche().size() < 4);
-        }
-        app.getControle().getAfficherTrianglesCheckbox().setDisable(!(imageChargeeGauche && imageChargeeDroite) && (app.getPointControle().getPointsGauche().size() < 3));
-        app.getControle().getBoutonValider().setDisable(app.getPointControle().getPointsGauche().isEmpty());
     }
 
     public HBox creerSectionImage() {

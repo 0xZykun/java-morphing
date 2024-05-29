@@ -20,9 +20,7 @@ public class PointControle {
         canevas.setOnMousePressed(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 indexSelectionne = trouverIndexPoint(e.getX(), e.getY(), points);
-                if (indexSelectionne == -1) {
-                    return;
-                } else {
+                if (indexSelectionne != -1) {
                     canevas.setOnMouseDragged(event -> {
                         Point nouveauPoint = new Point(
                                 Math.min(Math.max(event.getX(), 0), canevas.getWidth()),
@@ -40,7 +38,7 @@ public class PointControle {
                 }
             }
         });
-    
+
         canevas.setOnMouseReleased(e -> {
             canevas.setOnMouseDragged(null);
             app.getTriangleControle().redessinerCanevas(canevas, points, canevas == app.getImageLoader().getCanevasGauche() ? app.getImageLoader().getImageGauche() : app.getImageLoader().getImageDroite());
@@ -60,8 +58,8 @@ public class PointControle {
         } else {
             Point lastPoint = points.get(points.size() - 1);
             Point controle1 = new Point(
-            lastPoint.getX() * 2 / 3 + point.getX() / 3,
-            lastPoint.getY() * 2 / 3 + point.getY() / 3
+                lastPoint.getX() * 2 / 3 + point.getX() / 3,
+                lastPoint.getY() * 2 / 3 + point.getY() / 3
             );
             Point controle2 = new Point(
                 lastPoint.getX() / 3 + point.getX() * 2 / 3,
