@@ -3,10 +3,8 @@
 ## If you want to run the project from provided binaries :
 ### 1 - Get the project from releases
 ### 2 - Extract the archive
-    unzip java-morphing-1.0.zip
-### 3 - Go to the extracted folder
-    cd java-morphing-1.0
-### 4 - Run the project
+    unzip java-morphing-1.0-distribution.zip
+### 3 - Run the project
     ./custom-jre/bin/java -jar java-morphing-1.0.jar
 
 ## If you want to run the project from sources :
