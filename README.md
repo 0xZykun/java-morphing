@@ -11,23 +11,15 @@
 ## I - Install dependencies
 ### 1 - Install Maven
     sudo apt install maven
-### 2 - Download my custom Java Developpement Kit (JDK) from here :
-    unzip jdk-17.0.11_linux-x64_bin.zip
-### 3 - Extract the archive
-    TBA
-### 4 - Create a folder in the project root directory named "jdk"
-    mkdir jdk
-### 5 - Copy the extracted folder in the "jdk" folder
-    cp -r /path/to/jdk-17.0.11 jdk/
-### 6 - Download JavaFX SDK from here :
-    https://download2.gluonhq.com/openjfx/17.0.11/openjfx-17.0.11_linux-x64_bin-sdk.zip
-### 7 - Extract the archive
-    unzip openjfx-17.0.11_linux-x64_bin-sdk.zip
-### 8 - Create a folder in the project root directory named "lib"
-    mkdir lib
-### 9 - Copy the extracted folder in the "lib" folder
-    cp -r /path/to/javafx-sdk-17.0.11 lib/
-### 10 - Verify the paths are correct
+### 2 - Go to jdk folder
+    cd jdk
+### 3 - Extract the JDK archive
+    unzip jdk-17.0.11.zip
+### 4 - Go to the lib directory
+    cd ../lib/
+### 5 - Extract the JavaFX JDK
+    unzip javafx-sdk-17.0.11.zip
+### 6 - Verify the paths are correct
     .
     ├── jdk
     │   └── jdk-17.0.11
