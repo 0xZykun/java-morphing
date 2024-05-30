@@ -6,13 +6,16 @@ package cytech.morphing;
  * see import java.util.ArrayList;
  * see import java.util.Arrays;
  * see import java.util.List;
+ * see import java.io.File;
+ * see import java.io.IOException;
  */
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.io.File;
+import java.io.IOException;
 /**
  * Classe BarreMenu pour gérer les menus de l'application MorphingFx.
  * 
