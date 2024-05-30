@@ -81,8 +81,9 @@ public class BarreMenu {
 
         app.getControle().miseJourControle(1);
 
-        String cheminImageGauche = "square.png";
-        String cheminImageDroite = "cross.png";
+        String currentPath = new java.io.File(".").getCanonicalPath();
+        String cheminImageGauche = currentPath + "/src/main/resources/images/square.png";
+        String cheminImageDroite = currentPath + "/src/main/resources/images/cross.png";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -151,8 +152,9 @@ public class BarreMenu {
         app.getControle().miseJourControle(2);
         app.getControle().getFinirForme().setSelected(true);
 
-        String cheminImageGauche = "circle.png";
-        String cheminImageDroite = "star.png";
+        String currentPath = new java.io.File(".").getCanonicalPath();
+        String cheminImageGauche = currentPath + "/src/main/resources/images/circle.png";
+        String cheminImageDroite = currentPath + "/src/main/resources/images/star.png";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -225,8 +227,9 @@ public class BarreMenu {
 
         app.getControle().miseJourControle(3);
 
-        String cheminImageGauche = "bg1.jpg";
-        String cheminImageDroite = "bg2.jpg";
+        String currentPath = new java.io.File(".").getCanonicalPath();
+        String cheminImageGauche = currentPath + "/src/main/resources/images/bg1.jpg";
+        String cheminImageDroite = currentPath + "/src/main/resources/images/bg2.jpg";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -308,8 +311,9 @@ public class BarreMenu {
 
         app.getControle().miseJourControle(4);
 
-        String cheminImageGauche = "bg3.jpg";
-        String cheminImageDroite = "bg4.jpg";
+        String currentPath = new java.io.File(".").getCanonicalPath();
+        String cheminImageGauche = currentPath + "/src/main/resources/images/bg3.jpg";
+        String cheminImageDroite = currentPath + "/src/main/resources/images/bg4.jpg";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 

@@ -11,15 +11,21 @@
 ## I - Install dependencies
 ### 1 - Install Maven
     sudo apt install maven
-### 2 - Go to jdk folder
+### 2 - Install git-lfs
+    sudo apt install git-lfs
+### 3 - Initialize git-lfs
+    git-lfs install
+### 4 - Pull lfs files
+    git-lfs pull
+### 5 - Go to jdk folder
     cd jdk
-### 3 - Extract the JDK archive
+### 6 - Extract the JDK archive
     unzip jdk-17.0.11.zip
-### 4 - Go to the lib directory
+### 7 - Go to the lib directory
     cd ../lib/
-### 5 - Extract the JavaFX JDK
+### 8 - Extract the JavaFX JDK
     unzip javafx-sdk-17.0.11.zip
-### 6 - Verify the paths are correct
+### 9 - Verify the paths are correct
     .
     ├── jdk
     │   └── jdk-17.0.11
@@ -31,7 +37,7 @@
             ├── ...
 ## II - Run the project
 ### 1 - Configure dependencies in Maven
-    mvn clean install
+    mvn clean install --toolchains toolchains.xml
 ### 2 - Run the project
     mvn clean javafx:run --toolchains toolchains.xml
 ### 3 (Optional) - Create a package containing the project and its dependencies
