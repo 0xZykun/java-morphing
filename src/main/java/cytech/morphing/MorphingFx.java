@@ -1,4 +1,5 @@
 package cytech.morphing;
+
 /*
  * see import javafx.application.Application;
  * see import javafx.geometry.Rectangle2D;
@@ -8,30 +9,29 @@ package cytech.morphing;
  * see import javafx.stage.Screen;
  * see import javafx.stage.Stage;
  * see import javafx.scene.layout.GridPane;
- *
+ * 
  * see import java.util.ArrayList;
  * see import java.util.List;
  */
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * La classe principale pour l'application MorphingFx.
  * Gère l'interface utilisateur et les interactions avec les différents contrôles.
- *
+ * 
  */
 public class MorphingFx extends Application {
     /**
@@ -117,7 +117,7 @@ public class MorphingFx extends Application {
     /**
      * Le nombre d'images intermédiaires.
      */
-    private int nombreImagesIntermediaires = 8;
+    private int nombreImagesIntermediaires = 24;
 
     /**
      * La durée du GIF en secondes.
@@ -136,7 +136,7 @@ public class MorphingFx extends Application {
 
     /**
      * Point d'entrée principal pour l'application.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param primaryStage la scène principale de l'application
      */
@@ -176,23 +176,23 @@ public class MorphingFx extends Application {
 
     /**
      * Ouvre une boîte de dialogue pour configurer les options du GIF.
-     *
+     * 
      * @autor Mattéo REYNE
      */
     public void ouvrirDialogueOptions() {
         Dialog<ButtonType> dialogue = new Dialog<>();
         dialogue.setTitle("Configurer GIF");
-
+    
         dialogue.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
-
+    
         GridPane grille = new GridPane();
         grille.setHgap(10);
         grille.setVgap(10);
-
+    
         TextField compteurImages = new TextField(String.valueOf(nombreImages));
         TextField nbImagesIntermediaires = new TextField(String.valueOf(nombreImagesIntermediaires));
         TextField dureeGIF = new TextField(String.valueOf(dureeDuGIF));
-
+    
         grille.add(new Label("Nombre d'images (2 par défaut) :"), 0, 0);
         compteurImages.textProperty().addListener((observable, ancienneValeur, nouvelleValeur) -> {
             if (!nouvelleValeur.matches("\\d*")) {
@@ -200,25 +200,25 @@ public class MorphingFx extends Application {
             }
         });
         grille.add(compteurImages, 1, 0);
-
-        grille.add(new Label("Images intermédiaires (20 par défaut) :"), 0, 1);
+    
+        grille.add(new Label("Images intermédiaires (24 par défaut) :"), 0, 1);
         nbImagesIntermediaires.textProperty().addListener((observable, ancienneValeur, nouvelleValeur) -> {
             if (!nouvelleValeur.matches("\\d*")) {
                 nbImagesIntermediaires.setText(ancienneValeur);
             }
         });
         grille.add(nbImagesIntermediaires, 1, 1);
-
-        grille.add(new Label("Durée du GIF (s, 3 par défaut) :"), 0, 2);
+    
+        grille.add(new Label("Durée du GIF (s, 2 par défaut) :"), 0, 2);
         dureeGIF.textProperty().addListener((observable, ancienneValeur, nouvelleValeur) -> {
             if (!nouvelleValeur.matches("\\d*")) {
                 dureeGIF.setText(ancienneValeur);
             }
         });
         grille.add(dureeGIF, 1, 2);
-
+    
         ComboBox<String> selecteurMethode = new ComboBox<>();
-        selecteurMethode.getItems().addAll("Formes simples", "Formes arrondies", "Triangles", "Segments");
+        selecteurMethode.getItems().addAll("Formes simples", "Formes arrondies", "Triangulation", "Segments");
         switch (choixMethode) {
             case 1:
                 selecteurMethode.setValue("Formes simples");
@@ -227,7 +227,7 @@ public class MorphingFx extends Application {
                 selecteurMethode.setValue("Formes arrondies");
                 break;
             case 3:
-                selecteurMethode.setValue("Triangles");
+                selecteurMethode.setValue("Triangulation");
                 break;
             case 4:
                 selecteurMethode.setValue("Segments");
@@ -235,14 +235,14 @@ public class MorphingFx extends Application {
         }
         grille.add(new Label("Choix de la méthode :"), 0, 3);
         grille.add(selecteurMethode, 1, 3);
-
+    
         CheckBox cycleCheckBox = new CheckBox("Cycle");
         cycleCheckBox.setSelected(estCycle);
         grille.add(new Label("Cycle :"), 0, 4);
         grille.add(cycleCheckBox, 1, 4);
-
+    
         dialogue.getDialogPane().setContent(grille);
-
+    
         dialogue.setResultConverter(boutonDialogue -> {
             if (boutonDialogue == ButtonType.OK) {
                 try {
@@ -251,7 +251,7 @@ public class MorphingFx extends Application {
                     dureeDuGIF = Integer.parseInt(dureeGIF.getText());
                     choixMethode = selecteurMethode.getSelectionModel().getSelectedIndex() + 1;
                     estCycle = cycleCheckBox.isSelected();
-
+                    
                     controle.miseJourControle(choixMethode);
 
                     if (choixMethode == 4) {
@@ -267,7 +267,7 @@ public class MorphingFx extends Application {
                         this.getPointControle().configurerCanevas(this.getImageLoader().getCanevasGauche(), this.getPointControle().getPointsGauche(), this.getImageLoader().getCanevasDroite(), this.getPointControle().getPointsDroite());
                         this.getPointControle().configurerCanevas(this.getImageLoader().getCanevasDroite(), this.getPointControle().getPointsDroite(), this.getImageLoader().getCanevasGauche(), this.getPointControle().getPointsGauche());
                     }
-
+                    
 
                     pointControle.clearPoints();
                     imageLoader.actualiserEtatBoutons();
@@ -277,39 +277,114 @@ public class MorphingFx extends Application {
             }
             return null;
         });
-
+    
         dialogue.showAndWait();
     }
 
     /**
      * Ouvre une boîte de dialogue pour afficher le contenu du fichier README.
-     *
+     * 
      * @author Mattéo REYNE
      */
     public void ouvrirReadme() {
-        /*Alert dialogueReadme = new Alert(Alert.AlertType.INFORMATION);
-        dialogueReadme.setTitle("Aide");
-        dialogueReadme.setHeaderText("README - Instructions");
+        Dialog<ButtonType> dialogue = new Dialog<>();
+        dialogue.setTitle("Aide");
+        dialogue.setWidth(Screen.getPrimary().getVisualBounds().getWidth() * 0.9);
+        dialogue.setHeight(Screen.getPrimary().getVisualBounds().getHeight() * 0.9);
 
-        // Lire le fichier README
-        File readmeFile = new File("h:\Documents\Test2\README.md");
-        StringBuilder contentBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(readmeFile))) {
-            String sCurrentLine;
-            while ((sCurrentLine = br.readLine()) != null) {
-                contentBuilder.append(sCurrentLine).append("\n");
-            }
-        } catch (IOException e) {
-            contentBuilder.append("Erreur lors de la lecture du fichier README.");
-        }
+        dialogue.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
 
-        dialogueReadme.setContentText(contentBuilder.toString());
-        dialogueReadme.showAndWait();*/
+        VBox contenu = new VBox(10);
+        contenu.setPadding(new Insets(10));
+        
+        Label instructionsLabel = new Label("Comment utiliser le programme :");
+        instructionsLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+        TextFlow instructionsText = new TextFlow();
+
+        instructionsText.getChildren().addAll(
+            createBoldText(" Utiliser la barre de menu :\n"),
+            createBoldText(" \n  Options :\n"),
+            new Text("  - Configuration du GIF :\n"),
+            createBoldText("     Nombre d’images à utiliser pour faire le morphing : "), new Text(" 2\n"),
+            createBoldText("     Nombre d’images intermédiaires (par défaut 24) : "), new Text(" Nombres d’images que le programme va générer pour faire le morphing.\n"),
+            createBoldText("     Durée du GIF (par défaut 2) : "), new Text(" Nombre de secondes\n"),
+            createBoldText("     Choix de la méthode (par défaut Triangulation) :\n"),
+            new Text("       . Formes simples\n"),
+            new Text("       . Formes arrondies\n"),
+            new Text("       . Triangulation\n"),
+            new Text("       . Segments\n"),
+            createBoldText("     Case cycle : "), new Text(" Si elle est cochée, permet de lire le gif généré en boucle.\n"),
+            new Text("  - Aide : Affiche ce fichier\n"),
+            createBoldText(" \n    Presets (Choisi la méthode à utiliser et place les points/segments prédéfinis) :\n"),
+            new Text("       . Carré vers croix\n"),
+            new Text("       . Cercle vers etoile\n"),
+            new Text("       . Visages masculins\n"),
+            new Text("       . Visages féminins\n"),
+            createBoldText(" \n Utilisation du programme :\n"),
+            new Text("   Importer une image -> Les deux images doivent avoir la même résolution\n"),
+            new Text("   Supprimer une image -> Retire tous les points placés\n"),
+            createBoldText(" \n    Ajouter un point :\n"),
+            new Text(" Tous les points générés sur une image correspondent au point de la même couleur sur l’autre image.\n"),
+            new Text(" I - Formes simples et Triangulation :\n"),
+            new Text("   Le bouton ajoute un point au centre des deux images\n"),
+            new Text("   Clic droit ajoute un point aux coordonnées du pointeur sur les deux images\n"),
+            new Text(" II - Formes arrondies\n"),
+            new Text("   Le bouton ajoute un point au centre des deux images si ce point est le premier. Sinon les points de contrôle de la courbe sont ajoutés automatiquement pour former une courbe de Bézier.\n"),
+            new Text("   Clic droit ajoute un point aux coordonnées du pointeur sur les deux images si ce point est le premier. Sinon il ajoute automatiquement les points de contrôle de la courbe entre les deux points placés par l’utilisateur.\n"),
+            createBoldText(" \n    Ajouter segment :\n"),
+            new Text(" Tous les segments générés sur une image correspondent au segment de la même couleur sur l’autre image. Le point de départ du segment est en vert et le point d'arrivée est en rouge. Le segment est donc assimilé à un vecteur, donc son sens a une importance.\n"),
+            new Text("   Le bouton ajoute un segment vertical à gauche des deux images\n"),
+            new Text("   Le clic droit place un point fictif qui définira le début du segment si ce clic est le premier. Le second définira le point qui termine le segment et le programme tracera le segment final.\n"),
+            createBoldText(" \n    Supprimer point :\n"),
+            new Text(" I - Formes simples et Triangulation :\n"),
+            new Text("   Le bouton supprimer supprime le dernier point placé\n"),
+            new Text(" II - Formes arrondies\n"),
+            new Text("   Si il n’y a qu’un seul point, alors ce point sera supprimé. Sinon, le dernier point placé et les 2 points de contrôle de la courbe seront supprimés.\n"),
+            new Text(" III - Segments\n"),
+            new Text("   Supprime le dernier segment placé\n"),
+            createBoldText(" \n    Menu choix couleur de la ligne (Formes simples / Formes arrondies / Triangulation) :\n"),
+            new Text(" Permet de choisir la couleur des lignes tracées\n"),
+            createBoldText(" \n    Menu choix couleur des points (Formes arrondies) :\n"),
+            new Text(" Permet de choisir la couleur des points de contrôle des courbes\n"),
+            createBoldText(" \n    Case finir forme arrondie :\n"),
+            new Text(" Si elle est cochée, ajoute la courbe reliant le premier point placé au dernier point placé avec ses points de contrôle. Nécessaire pour pouvoir valider le morphing.\n"),
+            createBoldText(" \n    Case afficher les triangles Delaunay :\n"),
+            new Text(" Si elle est cochée, affiche les triangles (en cyan) formés par les points\n"),
+            createBoldText(" \n    Bouton valider :\n"),
+            new Text(" Permet de générer le morphing selon la méthode choisie.\n"),
+            createBoldText(" \n    Conditions requises :\n"),
+            createBoldText(" I - Formes simples :\n"),
+            new Text("   Avoir un point placé\n"),
+            createBoldText(" II - Formes arrondies :\n"),
+            new Text("   Avoir deux points placés et avoir coché “finir forme”\n"),
+            createBoldText(" III - Triangulation :\n"),
+            new Text("   Avoir trois points placés\n"),
+            createBoldText(" IV - Segments :\n"),
+            new Text("   Avoir un segment placé\n"),
+            createBoldText(" \n Visionneuse :\n"),
+            new Text("   Permet de voir les images intermédiaires générées par le programme une par une avec les flèches, ou de les faire défiler avec la scroll bar.\n")
+        );
+        instructionsText.setStyle("-fx-font-size: 14px;");
+
+        ScrollPane scrollPane = new ScrollPane(instructionsText);
+        scrollPane.setFitToWidth(true);
+
+        contenu.getChildren().addAll(instructionsLabel, scrollPane);
+
+        dialogue.getDialogPane().setContent(contenu);
+        dialogue.showAndWait();
+    }
+
+    private Text createBoldText(String text) {
+        Text t = new Text(text);
+        t.setStyle("-fx-font-weight: bold;");
+        return t;
     }
 
     /**
      * Ajuste les points d'un canevas aux dimensions originales de l'image.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param points la liste des points à ajuster
      * @param largeurCanvas la largeur du canevas
@@ -320,37 +395,22 @@ public class MorphingFx extends Application {
      */
     public List<Point> ajusterPointsAOriginal(List<Point> points, double largeurCanvas, double hauteurCanvas, double largeurOriginale, double hauteurOriginale) {
         List<Point> pointsAjustes = new ArrayList<>();
-
-        if (choixMethode == 2) {
-            double largeurEffectiveCanvas = largeurCanvas;
-            double hauteurEffectiveCanvas = hauteurCanvas;
-            double decalageX = largeurCanvas * 0.05;
-            double decalageY = hauteurCanvas * 0.05;
-            double echelleX = largeurOriginale / largeurEffectiveCanvas;
-            double echelleY = hauteurOriginale / hauteurEffectiveCanvas;
-
-            for (Point point : points) {
-                double ajusterX = (point.getX() - decalageX) * echelleX;
-                double ajusterY = (point.getY() - decalageY) * echelleY;
-                pointsAjustes.add(new Point(ajusterX, ajusterY));
-            }
-        } else {
-            double echelleX = largeurOriginale / largeurCanvas;
-            double echelleY = hauteurOriginale / hauteurCanvas;
-
-            for (Point point : points) {
-                double ajusterX = point.getX() * echelleX;
-                double ajusterY = point.getY() * echelleY;
-                pointsAjustes.add(new Point(ajusterX, ajusterY));
-            }
+    
+        double echelleX = largeurOriginale / largeurCanvas;
+        double echelleY = hauteurOriginale / hauteurCanvas;
+    
+        for (Point point : points) {
+            double ajusterX = point.getX() * echelleX;
+            double ajusterY = point.getY() * echelleY;
+            pointsAjustes.add(new Point(ajusterX, ajusterY));
         }
-
+    
         return pointsAjustes;
-    }
+    }    
 
     /**
      * Ajuste les triangles d'un canevas aux dimensions originales de l'image.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param triangles la liste des triangles à ajuster
      * @param canvasWidth la largeur du canevas
@@ -381,7 +441,7 @@ public class MorphingFx extends Application {
 
     /**
      * Ajuste les segments d'un canevas aux dimensions originales de l'image.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param segments la liste des segments à ajuster
      * @param canvasWidth la largeur du canevas
@@ -499,7 +559,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit l'index de l'étape courante.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param indexEtapeCourante l'index de l'étape courante à définir
      */
@@ -517,7 +577,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit la liste des images intermédiaires.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param imagesIntermediaires la liste des images intermédiaires à définir
      */
@@ -535,7 +595,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit la largeur de l'image originale.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param largeurImageOriginale la largeur de l'image originale à définir
      */
@@ -553,7 +613,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit la hauteur de l'image originale.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param hauteurImageOriginale la hauteur de l'image originale à définir
      */
@@ -571,7 +631,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit l'état du cycle.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param estCycle l'état du cycle à définir
      */
@@ -589,7 +649,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit le nombre d'images intermédiaires.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param nombreImagesIntermediaires le nombre d'images intermédiaires à définir
      */
@@ -607,7 +667,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit la durée du GIF en secondes.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param dureeDuGIF la durée du GIF à définir
      */
@@ -625,7 +685,7 @@ public class MorphingFx extends Application {
 
     /**
      * Définit la liste des images d'origine.
-     *
+     * 
      * @autor Mattéo REYNE
      * @param imagesOrigines la liste des images d'origine à définir
      */

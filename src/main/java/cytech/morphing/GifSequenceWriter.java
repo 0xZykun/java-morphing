@@ -110,30 +110,30 @@ public class GifSequenceWriter {
   }
 
   /**
-   * Method to generate a GIF
-   * @param images : LinkedList of BufferedImage, containing the images
-   * @param outputPath : String specifying the path to the generated GIF file
-   * @param frameDurationMs : int specifying the duration between frames in milliseconds
-   * @param isCycling : boolean indicating if the animation should loop
+   * Méthode pour générer un GIF.
+   * 
+   * @autor Anthony Garcia
+   * @param images : LinkedList de BufferedImage, contenant les images
+   * @param cheminSortie : String spécifiant le chemin du fichier GIF généré
+   * @param dureeFrameMs : int spécifiant la durée entre les frames en millisecondes
+   * @param estCyclique : boolean indiquant si l'animation doit boucler
+   * @throws Exception si une erreur se produit lors de la création du GIF
    */
-  public static void generateGif(LinkedList<BufferedImage> images, String outputPath, int frameDurationMs, boolean isCycling) throws Exception {
+  public static void genererGif(LinkedList<BufferedImage> images, String cheminSortie, int dureeFrameMs, boolean estCyclique) throws Exception {
     if (images.isEmpty()) {
-      throw new IllegalArgumentException("Image list is empty.");
+        throw new IllegalArgumentException("La liste d'images est vide.");
     }
     
-    // Create a new ImageOutputStream with the specified output path
-    ImageOutputStream output = new FileImageOutputStream(new File(outputPath));
+    ImageOutputStream sortie = new FileImageOutputStream(new File(cheminSortie));
     
-    // Create a GifSequenceWriter with the type of the first image, specified frame duration, and looping option
-    GifSequenceWriter writer = new GifSequenceWriter(output, images.getFirst().getType(), frameDurationMs, isCycling);
+    GifSequenceWriter ecrivain = new GifSequenceWriter(sortie, images.getFirst().getType(), dureeFrameMs, estCyclique);
     
-    // Write each image in the sequence
     for (BufferedImage image : images) {
-      writer.writeToSequence(image);
+        ecrivain.writeToSequence(image);
     }
     
-    // Close the writer and output stream
-    writer.close();
-    output.close();
+    ecrivain.close();
+    sortie.close();
   }
+
 }

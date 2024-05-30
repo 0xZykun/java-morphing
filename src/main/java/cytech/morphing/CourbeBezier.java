@@ -1,5 +1,13 @@
 package cytech.morphing;
 
+/*
+ * see import javafx.scene.canvas.GraphicsContext;
+ * see import javafx.scene.paint.Color;
+ * 
+ * see import java.util.ArrayList;
+ * see import java.util.LinkedList;
+ * see import java.util.List;
+ */
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -7,8 +15,21 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Classe CourbeBezier pour dessiner des courbes de Bézier et gérer les points de contrôle.
+ * 
+ */
 public class CourbeBezier {
 
+    /**
+     * Dessine une courbe de Bézier sur le contexte graphique donné.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param gc le contexte graphique sur lequel dessiner
+     * @param points la liste des points de contrôle de la courbe
+     * @param couleur la couleur de la courbe
+     * @param estFini indique si la courbe doit être fermée
+     */
     public static void dessinerCourbeBezier(GraphicsContext gc, List<Point> points, Color couleur, Boolean estFini) {
         if (points.size() < 4) {
             return;
@@ -33,7 +54,6 @@ public class CourbeBezier {
         }
 
         if (estFini) {
-            // Tracer la courbe de Bézier entre les trois derniers points et le premier point
             int n = points.size();
             Point p0 = points.get(n - 3);
             Point c0 = points.get(n - 2);
@@ -51,78 +71,86 @@ public class CourbeBezier {
         gc.stroke();
     }
 
+    /**
+     * Ajoute les points de contrôle pour fermer la courbe de Bézier.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param pointsDir la liste des points de contrôle de la courbe à fermer
+     */
+    private static void fermerCourbe(List<Point> pointsDir){
+        // Ajouter les points de contrôle pour fermer la courbe
+        Point premierPoint = pointsDir.get(0);
+        Point dernierPoint = pointsDir.get(pointsDir.size() - 1);
+
+        Point controle1 = new Point(
+            dernierPoint.getX() * 2 / 3 + premierPoint.getX() / 3,
+            dernierPoint.getY() * 2 / 3 + premierPoint.getY() / 3
+        );
+        Point controle2 = new Point(
+            dernierPoint.getX() / 3 + premierPoint.getX() * 2 / 3,
+            dernierPoint.getY() / 3 + premierPoint.getY() * 2 / 3
+        );
+
+        pointsDir.add(controle1);
+        pointsDir.add(controle2);
+    }
+
+    /**
+     * Ajoute les points de contrôle pour fermer les courbes de Bézier gauche et droite.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param pointsGauche la liste des points de contrôle de la courbe gauche
+     * @param pointsDroite la liste des points de contrôle de la courbe droite
+     */
     public static void finirForme(List<Point> pointsGauche, List<Point> pointsDroite) {
         if (pointsGauche.isEmpty() || pointsDroite.isEmpty()) {
             return;
         }
-
-        // Ajouter les points de contrôle pour fermer la courbe à gauche
-        Point premierPointGauche = pointsGauche.get(0);
-        Point dernierPointGauche = pointsGauche.get(pointsGauche.size() - 1);
-
-        Point controle1Gauche = new Point(
-            dernierPointGauche.getX() * 2 / 3 + premierPointGauche.getX() / 3,
-            dernierPointGauche.getY() * 2 / 3 + premierPointGauche.getY() / 3
-        );
-        Point controle2Gauche = new Point(
-            dernierPointGauche.getX() / 3 + premierPointGauche.getX() * 2 / 3,
-            dernierPointGauche.getY() / 3 + premierPointGauche.getY() * 2 / 3
-        );
-
-        pointsGauche.add(controle1Gauche);
-        pointsGauche.add(controle2Gauche);
-
-        // Ajouter les points de contrôle pour fermer la courbe à droite
-        Point premierPointDroite = pointsDroite.get(0);
-        Point dernierPointDroite = pointsDroite.get(pointsDroite.size() - 1);
-
-        Point controle1Droite = new Point(
-            dernierPointDroite.getX() * 2 / 3 + premierPointDroite.getX() / 3,
-            dernierPointDroite.getY() * 2 / 3 + premierPointDroite.getY() / 3
-        );
-        Point controle2Droite = new Point(
-            dernierPointDroite.getX() / 3 + premierPointDroite.getX() * 2 / 3,
-            dernierPointDroite.getY() / 3 + premierPointDroite.getY() * 2 / 3
-        );
-
-        pointsDroite.add(controle1Droite);
-        pointsDroite.add(controle2Droite);
+        fermerCourbe(pointsGauche);
+        fermerCourbe(pointsDroite);
     }
 
     /**
-	 * Fonction factorielle évalué en n
-	 * @param n
-	 * @return n!
-	 */
-	private static int facto(int n){
+     * Fonction factorielle évaluée en n.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param n la valeur pour laquelle calculer la factorielle
+     * @return la factorielle de n
+     */
+	private static int factorielle(int n){
 		if( n>1){
-			return n* facto(n-1);
+			return n* factorielle(n-1);
 		}
 		else return 1;
 	}
 
 	/**
-	 * Calcul i parmi n 
-	 * @param n
-	 * @param i
-	 * @return i parmi n
-	 */
-	private static int coefBino( int n , int i){
-		return (int) facto(n)/ (facto(i)*facto(n-i) );
+     * Calcule le coefficient binomial "i parmi n".
+     * 
+     * @autor Thomas BEAUSSART
+     * @param n le nombre total d'éléments
+     * @param i le nombre d'éléments choisis
+     * @return le coefficient binomial "i parmi n"
+     */
+	private static int coefficientBinomial( int n , int i){
+		return (int) factorielle(n)/ (factorielle(i)*factorielle(n-i) );
 	}
 
 	/**
-	 * Calcul la valeur de la courbe à l'instant t
-	 * @param t
-	 * @return C(t)
-	 */
-	private static Point pBernstein(List<Point> courbe, double t){
+     * Calcule la valeur de la courbe de Bézier à l'instant t.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param courbe la liste des points de contrôle de la courbe
+     * @param t l'instant pour lequel calculer la valeur
+     * @return la valeur de la courbe à l'instant t
+     */
+	private static Point valeurCourbe(List<Point> courbe, double t){
 		double x=0;
 		double y =0;
 		int n = courbe.size() ;
 		for (int i=0 ; i< n; i++ ) {
 	
-			double c = coefBino(n-1, i) * Math.pow(t,i) * Math.pow(1-t ,n-i-1)  ;
+			double c = coefficientBinomial(n-1, i) * Math.pow(t,i) * Math.pow(1-t ,n-i-1)  ;
 			x+= c * courbe.get(i).getX();
 			y+= c* courbe.get(i).getY();
 		}
@@ -131,9 +159,12 @@ public class CourbeBezier {
 	}
 
 	/**
-	 * Calcul le pas à prendre pour tracer la courbe
-	 * @return le pas
-	 */
+     * Calcule le pas à prendre pour tracer la courbe.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param courbe la liste des points de contrôle de la courbe
+     * @return le pas à prendre pour tracer la courbe
+     */
 	private static double getPas(List<Point> courbe){
 		double minX = courbe.get(0).getX();
 		double maxX = courbe.get(0).getX();
@@ -149,10 +180,13 @@ public class CourbeBezier {
 	}
 
 	/**
-	 * Donne la liste de points qui forme la courbe de bézier sans doublon
-	 * @return la liste de points
-	 */
-	public static List<Point> cBezier(List<Point> points){
+     * Donne la liste de points qui forme la courbe de Bézier sans doublon.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param points la liste des points de contrôle de la courbe
+     * @return la liste des points formant la courbe de Bézier
+     */
+	public static List<Point> courbeBezier(List<Point> points){
         List<Point> pointsFinal = new ArrayList<>();
 
         for (int i = 0; i < points.size() - 1; i += 3) {
@@ -165,9 +199,9 @@ public class CourbeBezier {
             double pas = getPas(courbe);
             int m = (int) Math.floor(1/pas)+1;
 
-            pointsFinal.add(pBernstein(courbe, 0));
+            pointsFinal.add(valeurCourbe(courbe, 0));
             for (int k =1 ; k< m ; k++){ 
-                Point pTemp = pBernstein(courbe, k*pas);
+                Point pTemp = valeurCourbe(courbe, k*pas);
                 if ( ! pTemp.equals(pointsFinal.get(pointsFinal.size()-1))){
                     pointsFinal.add(pTemp);
                 }

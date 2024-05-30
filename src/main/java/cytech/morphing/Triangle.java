@@ -1,10 +1,13 @@
 package cytech.morphing;
 
-/* ****************
-																											 *    TRIANGLE    *
-																											 **************** */
-
-// Importation des bibliotheques necessaires
+/*
+ * see import javafx.scene.paint.Color;
+ * see import javafx.scene.shape.Circle;
+ * see import javafx.scene.shape.Polygon;
+ * 
+ * see import java.util.ArrayList;
+ * see import java.util.List;
+ */
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -12,17 +15,35 @@ import javafx.scene.shape.Polygon;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Triangle {
-	private Point a; // Sommet a
-	private Point b; // Sommet b
-	private Point c; // Sommet c
 
+/**
+ * Classe représentant un triangle avec des méthodes pour diverses opérations géométriques et graphiques.
+ * 
+ */
+public class Triangle {
 	/**
-	 * Constructeur qui permet d'initialiser le triangle
-	 * @param a : Un sommet du triangle
-	 * @param b : Un sommet du triangle
-	 * @param c : Un sommet du triangle
-	 */
+     * Sommet a du triangle.
+     */
+    private Point a;
+
+    /**
+     * Sommet b du triangle.
+     */
+    private Point b;
+
+    /**
+     * Sommet c du triangle.
+     */
+    private Point c;
+
+    /**
+     * Constructeur qui permet d'initialiser le triangle.
+     * 
+     * @autor Marc DJOLE
+     * @param a Un sommet du triangle
+     * @param b Un sommet du triangle
+     * @param c Un sommet du triangle
+     */
 	public Triangle(Point a, Point b, Point c)
 	{
 		this.a = a;
@@ -31,62 +52,76 @@ public class Triangle {
 	}
 
 	/**
-	 * Getter qui retourne le sommet a
-	 * @return : Retourne le Point a
-	 */
+     * Getter qui retourne le sommet a.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne le Point a
+     */
 	public Point getA() {
 		return a;
 	}
 
 	/**
-	 * Setter qui remplace le sommet a par newa
-	 * @param newa : Sommet de remplacement
-	 */
+     * Setter qui remplace le sommet a par newa.
+     * 
+     * @autor Marc DJOLE
+     * @param newa Sommet de remplacement
+     */
 	public void setA(Point newa) {
 		this.a.setX(newa.getX());
 		this.a.setY(newa.getY());
 	}
 
 	/**
-	 * Getter qui retourne le sommet b
-	 * @return : Retourne le Point b
-	 */
+     * Getter qui retourne le sommet b.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne le Point b
+     */
 	public Point getB() {
 		return b;
 	}
 
 	/**
-	 * Setter qui remplace le sommet b par newb
-	 * @param newb : Sommet de remplacement
-	 */
+     * Setter qui remplace le sommet b par newb.
+     * 
+     * @autor Marc DJOLE
+     * @param newb Sommet de remplacement
+     */
 	public void setB(Point newb) {
 		this.b.setX(newb.getX());
 		this.b.setY(newb.getY());
 	}
 
 	/**
-	 * Getter qui retourne le sommet c
-	 * @return : Retourne le Point c
-	 */
+     * Getter qui retourne le sommet c.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne le Point c
+     */
 	public Point getC() {
 		return c;
 	}
 
 	/**
-	 * Setter qui remplace le sommet c par newc
-	 * @param newc : Sommet de remplacement
-	 */
+     * Setter qui remplace le sommet c par newc.
+     * 
+     * @autor Marc DJOLE
+     * @param newc Sommet de remplacement
+     */
 	public void setC(Point newc) {
 		this.c.setX(newc.getX());
 		this.c.setY(newc.getY());
 	}
 
 	/**
-	 * Methoque qui interpole deux triangles et renvoie le resultat
-	 * @param t : Coefficient d'interpolation
-	 * @param p : Deuxieme triangle de l'interpolation
-	 * @return : Retourne le triangle resultat de l'interpolation
-	 */
+     * Méthode qui interpole deux triangles et renvoie le résultat.
+     * 
+     * @autor Marc DJOLE
+     * @param t Coefficient d'interpolation
+     * @param p Deuxième triangle de l'interpolation
+     * @return Retourne le triangle résultat de l'interpolation
+     */
 	public	Triangle morphToTriangle(Triangle t,double p) {
 		return new Triangle(new Point(a.getX()*(1-p) + t.getA().getX()*p,a.getY()*(1-p) + t.getA().getY()*p),
 							new Point(b.getX()*(1-p) + t.getB().getX()*p,b.getY()*(1-p) + t.getB().getY()*p),
@@ -95,9 +130,11 @@ public class Triangle {
 
 
 	/**
-	 * Methode qui calcule les coordonnees du cercle inscrit au triangle et les renvoie
-	 * @return : Retourne un tableau qui contient les cordonnees du cercle circonscrit et son rayon
-	 */
+     * Méthode qui calcule les coordonnées du cercle inscrit au triangle et les renvoie.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne un tableau qui contient les coordonnées du cercle circonscrit et son rayon
+     */
 	public double[] cercleInscrit(){
 
 		// mediane du segment [ab]
@@ -128,9 +165,11 @@ public class Triangle {
 	}
 
 	/**
-	 * Methode qui cree une instance graphique du triangle et la renvoie
-	 * @return : Retourne une instance graphique du triangle
-	 */
+     * Méthode qui crée une instance graphique du triangle et la renvoie.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne une instance graphique du triangle
+     */
 	public Polygon tracerTriangle() {
 		
 		// On place les coordonnes des points dans un tableau 
@@ -147,11 +186,12 @@ public class Triangle {
 		
 	}
 
-
 	/**
-	 * Methode qui cree une instance graphique du cercle inscrit au triangle
-	 * @return : Retourne une instance graphique du cercle inscrit au triangle
-	 */
+     * Méthode qui crée une instance graphique du cercle inscrit au triangle.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne une instance graphique du cercle inscrit au triangle
+     */
 	public Circle tracerCercleInscrit() {
 
 		double[] valeurs = cercleInscrit();
@@ -164,10 +204,12 @@ public class Triangle {
 	}
 
 	/**
-	 * Methode qui teste si un point appartient au cercle circonscrit a un triangle
-	 * @param p : Point dont on doit tester l'appartenance au cercle inscrit au triangle
-	 * @return : retourne vrai si le triangle est dans le cercle, faux sinon
-	 */
+     * Méthode qui teste si un point appartient au cercle circonscrit à un triangle.
+     * 
+     * @autor Marc DJOLE
+     * @param p Point dont on doit tester l'appartenance au cercle inscrit au triangle
+     * @return Retourne vrai si le point appartient au cercle, faux sinon
+     */
 	public boolean cercleContientPoint(Point p){
 
 		// Si le point a tester est un sommet du triangle, on retourne faux
@@ -180,9 +222,11 @@ public class Triangle {
 	}
 
 	/**
-	 * Methode qui calcule l'aire du triangle
-	 * @return : Retourne l'aire du triangle
-	 */
+     * Méthode qui calcule l'aire du triangle.
+     * 
+     * @autor Marc DJOLE
+     * @return Retourne l'aire du triangle
+     */
 	public double aire() {
 		double x1 = a.getX();
 		double y1 = a.getY();
@@ -198,10 +242,12 @@ public class Triangle {
 
 
 	/**
-	 * Methode qui calcule les coordonnees barycentrique d'un point
-	 * @param p : Point dont on doit calculer les coordonnees barycentriques
-	 * @return : Retourne les coordonnees barycentriques sous forme de tableau
-	 */
+     * Méthode qui calcule les coordonnées barycentriques d'un point.
+     * 
+     * @autor Marc DJOLE
+     * @param p Point dont on doit calculer les coordonnées barycentriques
+     * @return Retourne les coordonnées barycentriques sous forme de tableau
+     */
 	public Double[] coordoneesBarycentriques(Point p){
 		Triangle BCP = new Triangle(b, c, p);
 		Triangle ACP = new Triangle(a, c, p);
@@ -218,10 +264,12 @@ public class Triangle {
 
 
 	/**
-	 * Methode qui teste si un point appartient au triangle
-	 * @param p : Point dont on doit tester l'appartenance au triangle
-	 * @return : Retourne vrai si le point appartient au triangle, faux sinon
-	 */
+     * Méthode qui teste si un point appartient au triangle.
+     * 
+     * @autor Marc DJOLE
+     * @param p Point dont on doit tester l'appartenance au triangle
+     * @return Retourne vrai si le point appartient au triangle, faux sinon
+     */
 	public boolean pointAppartient(Point p) {
 		Triangle BCP = new Triangle(b, c, p);
 		Triangle ACP = new Triangle(a, c, p);
@@ -237,23 +285,37 @@ public class Triangle {
 		return(aireBCP + aireABP + aireACP - this.aire() < 1e-9);
 	}
 
+	/**
+     * Méthode toString pour afficher les coordonnées des sommets du triangle.
+     * 
+     * @autor Marc DJOLE
+     * @return Chaîne représentant les coordonnées des sommets du triangle
+     */
 	@Override
     public String toString() {
         return "A : " + a + " | B : " + b + " | C : " + c;
     }
 
 	/**
-	 * Methode qui verifie si un des sommets du triangle est situe dans un coin de l'image
-	 * @param width : Largeur de l'image
-	 * @param heigth : Hauteur d el'image
-	 * @return : retourne vrai si un sommet est situe dans un coin, faux sinon
-	 */
+     * Méthode qui vérifie si un des sommets du triangle est situé dans un coin de l'image.
+     * 
+     * @autor Marc DJOLE
+     * @param width Largeur de l'image
+     * @param heigth Hauteur de l'image
+     * @return Retourne vrai si un sommet est situé dans un coin, faux sinon
+     */
 	public boolean unSommetEstAuCoin(int width, int heigth){
 		return (a.estAuCoin(width, heigth) || b.estAuCoin(width, heigth) || c.estAuCoin(width, heigth));
 	}
 
-
-	public static List<Triangle> deepCopy(List<Triangle> listeTriangles){
+	/**
+     * Méthode de copie profonde pour une liste de triangles.
+     * 
+     * @autor Marc DJOLE
+     * @param listeTriangles Liste de triangles à copier
+     * @return Copie profonde de la liste de triangles
+     */
+	public static List<Triangle> copieProfonde(List<Triangle> listeTriangles){
 		List<Triangle> copy  = new ArrayList<>();
 		for (Triangle triangle : listeTriangles){
 			copy.add(new Triangle(new Point(triangle.getA().getX(), triangle.getA().getY()), new Point(triangle.getB().getX(), triangle.getB().getY()), new Point(triangle.getC().getX(), triangle.getC().getY())));

@@ -1,28 +1,48 @@
 package cytech.morphing;
-																											/* ****************
-                                                                                                             *    IMAGEBIT    *
-                                                                                                             **************** */
 
-
-// Importation des bibliotheques necessaires
-import java.awt.image.BufferedImage;
-import java.util.Arrays;
-import java.util.HashMap;
-
+/*
+ * see import javafx.embed.swing.SwingFXUtils;
+ * see import javafx.scene.image.*;
+ * see import javafx.scene.paint.Color;
+ * 
+ * see import java.util.Arrays;
+ * see import java.util.HashMap;
+ * see import java.awt.image.BufferedImage;
+ */
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.*;
 import javafx.scene.paint.Color;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.awt.image.BufferedImage;
+
+/**
+ * Classe ImageBit pour gérer les opérations sur les images.
+ *
+ */
 public class ImageBit {
 
-    private WritableImage img; // Autre format de l'image
-    private int height; // hauteur de l'image
-    private int width;  // largeur de l'image
-
+    /**
+     * Autre format de l'image.
+     */
+    private WritableImage img;
 
     /**
-     * Constructeur qui permet d'initialiser l'image
-     * @param chemin : chemin de l'image dans le repertoire
+     * Hauteur de l'image.
+     */
+    private int height;
+
+    /**
+     * Largeur de l'image.
+     */
+    private int width;
+
+    /**
+     * Constructeur qui permet d'initialiser l'image.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param chemin chemin de l'image dans le répertoire
      */
     public ImageBit(String chemin) {
         Image image = new Image(chemin);
@@ -38,8 +58,10 @@ public class ImageBit {
     }
 
     /**
-     * Constructeur supplémentaire pour initialiser ImageBit directement avec un WritableImage
-     * @param writableImage : image à utiliser pour initialiser
+     * Constructeur supplémentaire pour initialiser ImageBit directement avec un WritableImage.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param writableImage image à utiliser pour initialiser
      */
     public ImageBit(WritableImage writableImage) {
         this.width = (int) writableImage.getWidth();
@@ -54,10 +76,12 @@ public class ImageBit {
     }
 
     /**
-     * Methode qui permet de recuperer la couleur d'un point de l'image
-     * @param x : Cordonnee x du point dont on doit recuperer la couleur
-     * @param y : Coordonnee y du point dont on doit recuperer la couleur
-     * @return : Retourne la couleur du point sous forme de tableau de l'intensite des couleurs primaires
+     * Méthode qui permet de récupérer la couleur d'un point de l'image.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param x coordonnée x du point dont on doit récupérer la couleur
+     * @param y coordonnée y du point dont on doit récupérer la couleur
+     * @return retourne la couleur du point sous forme de tableau de l'intensité des couleurs primaires
      */
     public double[] getRGBA(int x, int y) {
         PixelReader pixelReader = img.getPixelReader();
@@ -70,14 +94,16 @@ public class ImageBit {
     }
 
     /**
-     * Methode qui permet de modifier la couleur d'un point
-     * @param x : Coordonne x du point dont on doit modifier la couleur
-     * @param y : Coordonne y du point dont on doit modifier la couleur
-     * @param r : Pourcentage de rouge
-     * @param g : Pourcentage de vert
-     * @param b : Pourcentage de bleu
-     * @param a : Opacite
-     * @return  : retourne vrai si la couleur a pu etre modifie, faux sinon
+     * Méthode qui permet de modifier la couleur d'un point.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param x coordonnée x du point dont on doit modifier la couleur
+     * @param y coordonnée y du point dont on doit modifier la couleur
+     * @param r pourcentage de rouge
+     * @param g pourcentage de vert
+     * @param b pourcentage de bleu
+     * @param a opacité
+     * @return retourne vrai si la couleur a pu être modifiée, faux sinon
      */
     public boolean setRGB(int x, int y, double r, double g, double b, double a) {
         if ((x >= 0) && (x < width) && (y >= 0) && (y < height) && (r >= 0) && (r < 256) && (g >= 0) && (g < 256) && (b >= 0) && (b < 256)) {
@@ -92,16 +118,20 @@ public class ImageBit {
 
 
     /**
-     * Methode qui renvoie la hauteur de l'image
-     * @return : Retourne la hauteur de l'image
+     * Méthode qui renvoie la hauteur de l'image.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return retourne la hauteur de l'image
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     * Methode qui renvoie la largeur de l'image
-     * @return : Retourne la largeur de l'image
+     * Méthode qui renvoie la largeur de l'image.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return retourne la largeur de l'image
      */
     public int getWidth() {
         return width;
@@ -109,8 +139,10 @@ public class ImageBit {
 
 
     /**
-     * Methode qui cree une instance graphique de l'image et la renvoie
-     * @return : Retourne une instance graphique de l'image
+     * Méthode qui crée une instance graphique de l'image et la renvoie.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return retourne une instance graphique de l'image
      */
     public ImageView  genererImage(){
         ImageView imageView = new ImageView(img);
@@ -119,28 +151,40 @@ public class ImageBit {
 
     /**
      * Méthode qui réalise une copie profonde de l'objet ImageBit.
-     * @return ImageBit : une nouvelle instance de ImageBit avec les mêmes données d'image.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return une nouvelle instance de ImageBit avec les mêmes données d'image
      */
-    public ImageBit deepCopy() {
+    public ImageBit copieProfonde() {
         ImageBit copy = new ImageBit(this.img); // Assumons l'existence d'un constructeur prenant un WritableImage
         return copy;
     }
 
     /**
      * Convertit l'objet ImageBit en BufferedImage.
-     * @return BufferedImage : l'image convertie au format BufferedImage.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return l'image convertie au format BufferedImage
      */
     public BufferedImage toBufferedImage() {
         return SwingFXUtils.fromFXImage(this.img, null);
     }
 
+    /**
+     * Méthode qui renvoie l'image au format WritableImage.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return l'image au format WritableImage
+     */
     public WritableImage getImg() {
         return img;
     }
 
     /**
-     * Methode qui renvoie la couleur de la forme 
-     * @param  couleur du fond
+     * Méthode qui renvoie la couleur de la forme.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param couleurFond couleur du fond
      * @return couleur de la forme
      */
     public double[] getCouleurForme(double[] couleurFond){

@@ -1,5 +1,20 @@
 package cytech.morphing;
 
+/*
+ * see import javafx.scene.canvas.Canvas;
+ * import javafx.scene.canvas.GraphicsContext;
+ * import javafx.scene.control.Alert;
+ * import javafx.scene.control.Button;
+ * import javafx.stage.FileChooser;
+ * import javafx.scene.image.Image;
+ * import javafx.scene.layout.BorderPane;
+ * import javafx.scene.layout.HBox;
+ * import javafx.application.Platform;
+ * import javafx.geometry.Pos;
+ * import javafx.scene.Scene;
+ * 
+ * see import java.io.File;
+ */
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
@@ -14,14 +29,71 @@ import javafx.scene.Scene;
 
 import java.io.File;
 
+/**
+ * Classe ImageLoader pour gérer le chargement et la manipulation des images.
+ * 
+ */
 public class ImageLoader {
+    /**
+     * Référence à l'application principale.
+     */
     private MorphingFx app;
-    private Canvas canevasGauche, canevasDroite;
-    private Button boutonImporterGauche, boutonImporterDroite, boutonEffacerGauche, boutonEffacerDroite;
-    private boolean imageChargeeGauche = false;
-    private boolean imageChargeeDroite = false;
-    private Image imageGauche, imageDroite;
 
+    /**
+     * Canevas pour l'image de gauche.
+     */
+    private Canvas canevasGauche;
+
+    /**
+     * Canevas pour l'image de droite.
+     */
+    private Canvas canevasDroite;
+
+    /**
+     * Bouton pour importer une image à gauche.
+     */
+    private Button boutonImporterGauche;
+
+    /**
+     * Bouton pour importer une image à droite.
+     */
+    private Button boutonImporterDroite;
+
+    /**
+     * Bouton pour effacer l'image de gauche.
+     */
+    private Button boutonEffacerGauche;
+
+    /**
+     * Bouton pour effacer l'image de droite.
+     */
+    private Button boutonEffacerDroite;
+
+    /**
+     * Indicateur si une image est chargée à gauche.
+     */
+    private boolean imageChargeeGauche = false;
+
+    /**
+     * Indicateur si une image est chargée à droite.
+     */
+    private boolean imageChargeeDroite = false;
+
+    /**
+     * Image chargée à gauche.
+     */
+    private Image imageGauche;
+
+    /**
+     * Image chargée à droite.
+     */
+    private Image imageDroite;
+
+    /**
+     * Classe ImageLoader pour gérer le chargement et la manipulation des images.
+     * 
+     * @author Anthony GARCIA
+     */
     public ImageLoader(MorphingFx app) {
         this.app = app;
 
@@ -29,6 +101,14 @@ public class ImageLoader {
         this.canevasDroite = new Canvas(app.getLargeurScene()/2.1, app.getHauteurScene()/2.1);
     }
 
+    /**
+     * Crée les contrôles d'image pour l'interface utilisateur.
+     * 
+     * @author Anthony GARCIA
+     * @param canevas le canevas sur lequel dessiner l'image
+     * @param estGauche indique si le canevas est à gauche
+     * @return un BorderPane contenant les contrôles d'image
+     */
     public BorderPane creerControleImage(Canvas canevas, boolean estGauche) {
         BorderPane panneauBord = new BorderPane();
 
@@ -48,6 +128,7 @@ public class ImageLoader {
         boutonEffacer.setOnAction(e -> {
             effacerCanevas(estGauche ? "gauche" : "droite");
             app.getPointControle().clearPoints();
+            app.getTriangleControle().generateDelaunayTriangles();
             app.getTriangleControle().redessinerCanevas(canevasGauche, app.getPointControle().getPointsGauche(), imageGauche);
             app.getTriangleControle().redessinerCanevas(canevasDroite, app.getPointControle().getPointsDroite(), imageDroite);
             actualiserEtatBoutons();
@@ -80,6 +161,14 @@ public class ImageLoader {
         return panneauBord;
     }
 
+    /**
+     * Crée les contrôles d'image pour l'interface utilisateur.
+     * 
+     * @author Anthony GARCIA
+     * @param canevas le canevas sur lequel dessiner l'image
+     * @param estGauche indique si le canevas est à gauche
+     * @return un BorderPane contenant les contrôles d'image
+     */
     public void chargerImage(String chemin, int index) {
         Image imageTemporaire = new Image(chemin, false);
         ImageBit nouvelleImageBit = new ImageBit(chemin);
@@ -155,6 +244,13 @@ public class ImageLoader {
         }
     }    
 
+    /**
+     * Charge une image et l'affiche sur le canevas spécifié.
+     * 
+     * @author Anthony GARCIA
+     * @param canevas le canevas sur lequel dessiner l'image
+     * @param cote indique si l'image est pour la gauche ou la droite
+     */
     public void chargerImage(Canvas canevas, String cote) {
         FileChooser selecteurFichier = new FileChooser();
         File fichier = selecteurFichier.showOpenDialog(null);
@@ -230,6 +326,12 @@ public class ImageLoader {
         }
     }
 
+    /**
+     * Efface le canevas spécifié et réinitialise les contrôles.
+     * 
+     * @author Anthony GARCIA
+     * @param cote indique si le canevas à effacer est à gauche ou à droite
+     */
     public void effacerCanevas(String cote) {
         app.getPointControle().clearPoints();
         if ("gauche".equals(cote)) {
@@ -246,14 +348,24 @@ public class ImageLoader {
         actualiserEtatBoutons();
     }
 
+    /**
+     * Initialise les boutons d'importation d'image.
+     * 
+     * @author Anthony GARCIA
+     * @param scene la scène principale de l'application
+     */
     public void initialiserBoutonsImage(Scene scene) {
         boutonImporterGauche.setOnAction(e -> chargerImage(canevasGauche, "gauche"));
         boutonImporterDroite.setOnAction(e -> chargerImage(canevasDroite, "droite"));
     }
 
+    /**
+     * Actualise l'état des boutons en fonction des images chargées.
+     * 
+     * @author Anthony GARCIA
+     */
     public void actualiserEtatBoutons() {
         if (app.getChoixMethode() == 4) {
-            System.out.println(app.getSegmentControle().getSegmentsDroite());
             app.getControle().getBoutonAjouterSegment().setDisable(!(imageChargeeGauche && imageChargeeDroite));
             app.getControle().getBoutonSupprimerSegment().setDisable(app.getSegmentControle().getSegmentsDroite().isEmpty());
             app.getControle().getBoutonValider().setDisable(app.getSegmentControle().getSegmentsDroite().isEmpty());
@@ -276,6 +388,12 @@ public class ImageLoader {
         boutonEffacerDroite.setDisable(!imageChargeeDroite);
     }
 
+    /**
+     * Crée une section pour afficher les images et les contrôles associés.
+     * 
+     * @author Anthony GARCIA
+     * @return un HBox contenant les contrôles d'image et de contrôle
+     */
     public HBox creerSectionImage() {
         HBox sectionImage = new HBox(10);
         sectionImage.getChildren().addAll(
@@ -288,6 +406,13 @@ public class ImageLoader {
         return sectionImage;
     }
 
+    /**
+     * Affiche une alerte à l'utilisateur.
+     * 
+     * @author Anthony GARCIA
+     * @param titre le titre de l'alerte
+     * @param contenu le contenu de l'alerte
+     */
     private void montrerAlerte(String titre, String contenu) {
         Alert alerte = new Alert(Alert.AlertType.ERROR);
         alerte.setTitle(titre);
@@ -298,42 +423,102 @@ public class ImageLoader {
         alerte.showAndWait();
     }
 
+    /**
+     * Retourne le canevas de gauche.
+     * 
+     * @author Anthony GARCIA
+     * @return le canevas de gauche
+     */
     public Canvas getCanevasGauche() {
         return canevasGauche;
     }
 
+    /**
+     * Retourne le canevas de droite.
+     * 
+     * @author Anthony GARCIA
+     * @return le canevas de droite
+     */
     public Canvas getCanevasDroite() {
         return canevasDroite;
     }
 
+    /**
+     * Indique si une image est chargée à gauche.
+     * 
+     * @author Anthony GARCIA
+     * @return true si une image est chargée à gauche, sinon false
+     */
     public boolean isImageChargeeGauche() {
         return imageChargeeGauche;
     }
 
+    /**
+     * Définit si une image est chargée à gauche.
+     * 
+     * @author Anthony GARCIA
+     * @param imageChargeeGauche true si une image est chargée à gauche, sinon false
+     */
     public void setImageChargeeGauche(boolean imageChargeeGauche) {
         this.imageChargeeGauche = imageChargeeGauche;
     }
 
+    /**
+     * Indique si une image est chargée à droite.
+     * 
+     * @author Anthony GARCIA
+     * @return true si une image est chargée à droite, sinon false
+     */
     public boolean isImageChargeeDroite() {
         return imageChargeeDroite;
     }
 
+    /**
+     * Définit si une image est chargée à droite.
+     * 
+     * @author Anthony GARCIA
+     * @param imageChargeeDroite true si une image est chargée à droite, sinon false
+     */
     public void setImageChargeeDroite(boolean imageChargeeDroite) {
         this.imageChargeeDroite = imageChargeeDroite;
     }
 
+    /**
+     * Retourne l'image de gauche.
+     * 
+     * @author Anthony GARCIA
+     * @return l'image de gauche
+     */
     public Image getImageGauche() {
         return imageGauche;
     }
 
+    /**
+     * Définit l'image de gauche.
+     * 
+     * @author Anthony GARCIA
+     * @param imageGauche l'image de gauche
+     */
     public void setImageGauche(Image imageGauche) {
         this.imageGauche = imageGauche;
     }
 
+    /**
+     * Retourne l'image de droite.
+     * 
+     * @author Anthony GARCIA
+     * @return l'image de droite
+     */
     public Image getImageDroite() {
         return imageDroite;
     }
 
+    /**
+     * Définit l'image de droite.
+     * 
+     * @author Anthony GARCIA
+     * @param imageDroite l'image de droite
+     */
     public void setImageDroite(Image imageDroite) {
         this.imageDroite = imageDroite;
     }

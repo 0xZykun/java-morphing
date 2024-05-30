@@ -1,5 +1,39 @@
 package cytech.morphing;
 
+/*
+ * see import javafx.animation.KeyFrame;
+ * see import javafx.animation.Timeline;
+ * see import javafx.application.Platform;
+ * see import javafx.concurrent.Task;
+ * see import javafx.embed.swing.SwingFXUtils;
+ * see import javafx.geometry.Insets;
+ * see import javafx.geometry.Pos;
+ * see import javafx.scene.Scene;
+ * see import javafx.scene.control.Menu;
+ * see import javafx.scene.control.MenuBar;
+ * see import javafx.scene.control.MenuItem;
+ * see import javafx.scene.control.ProgressBar;
+ * see import javafx.scene.image.Image;
+ * see import javafx.scene.image.ImageView;
+ * see import javafx.scene.image.PixelReader;
+ * see import javafx.scene.image.PixelWriter;
+ * see import javafx.scene.image.WritableImage;
+ * see import javafx.scene.layout.StackPane;
+ * see import javafx.scene.layout.VBox;
+ * see import javafx.scene.paint.Color;
+ * see import javafx.stage.FileChooser;
+ * see import javafx.stage.Screen;
+ * see import javafx.stage.Stage;
+ * see import javafx.util.Duration;
+ *
+ * see import java.awt.image.BufferedImage;
+ * see import java.io.File;
+ * see import java.util.ArrayList;
+ * see import java.util.HashMap;
+ * see import java.util.LinkedList;
+ * see import java.util.List;
+ * see import java.util.Map;
+ */
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -33,13 +67,34 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Classe MorphingTask pour gérer les différents morphing.
+ * 
+ */
 public class MorphingTask {
+    /**
+     * Référence à l'application principale.
+     */
     private MorphingFx app;
 
+    /**
+     * Constructeur de la classe MorphingTask.
+     * 
+     * @param app Instance de l'application principale
+     */
     public MorphingTask(MorphingFx app) {
         this.app = app;
     }
 
+    /**
+     * Effectue le morphing de l'image en utilisant la méthode 1.
+     * 
+     * @author Anthony GARCIA
+     * @param pointsGauche Points de contrôle de l'image gauche
+     * @param pointsDroite Points de contrôle de l'image droite
+     * @param imageGauche Image de départ
+     * @param imageDroite Image de destination
+     */
     public void morphing1(List<Point> pointsGauche, List<Point> pointsDroite, ImageBit imageGauche, ImageBit imageDroite) {
         app.getImagesIntermediaires().clear();
         int nombreEtapes = app.getNombreImagesIntermediaires();
@@ -57,9 +112,9 @@ public class MorphingTask {
                 PixelReader lecteurGauche = imageGauche.getImg().getPixelReader();
                 PixelReader lecteurDroite = imageDroite.getImg().getPixelReader();
 
-                Color couleurFondGauche = getCouleurPlusFrequente(lecteurGauche, imageGauche.getImg(), pointsGauche);
+                Color couleurFondGauche = getCouleurFond(lecteurGauche, imageGauche.getImg(), pointsGauche);
                 Color couleurFormeGauche = getCouleurPlusFrequenteDansForme(lecteurGauche, imageGauche.getImg(), pointsGauche, couleurFondGauche);
-                Color couleurFondDroite = getCouleurPlusFrequente(lecteurDroite, imageDroite.getImg(), pointsDroite);
+                Color couleurFondDroite = getCouleurFond(lecteurDroite, imageDroite.getImg(), pointsDroite);
                 Color couleurFormeDroite = getCouleurPlusFrequenteDansForme(lecteurDroite, imageDroite.getImg(), pointsDroite, couleurFondDroite);
 
                 for (int etape = 0; etape <= nombreEtapes; etape++) {
@@ -100,6 +155,15 @@ public class MorphingTask {
         new Thread(tacheMorphing).start();
     }
 
+    /**
+     * Effectue le morphing de l'image en utilisant la méthode 2.
+     * 
+     * @author Thomas BEAUSSART
+     * @param pointsGauche Points de contrôle de l'image gauche
+     * @param pointsDroite Points de contrôle de l'image droite
+     * @param imageGauche Image de départ
+     * @param imageDroite Image de destination
+     */
     public void morphing2(List<Point> pointsGauche, List<Point> pointsDroite, ImageBit imageGauche, ImageBit imageDroite) {
         app.getImagesIntermediaires().clear();
         int nombreEtapes = app.getNombreImagesIntermediaires();
@@ -118,9 +182,9 @@ public class MorphingTask {
                 PixelReader lecteurGauche = imageGauche.getImg().getPixelReader();
                 PixelReader lecteurDroite = imageDroite.getImg().getPixelReader();
     
-                Color couleurFondGauche = getCouleurPlusFrequente(lecteurGauche, imageGauche.getImg(), pointsGauche);
+                Color couleurFondGauche = getCouleurFond(lecteurGauche, imageGauche.getImg(), pointsGauche);
                 Color couleurFormeGauche = getCouleurPlusFrequenteDansForme(lecteurGauche, imageGauche.getImg(), pointsGauche, couleurFondGauche);
-                Color couleurFondDroite = getCouleurPlusFrequente(lecteurDroite, imageDroite.getImg(), pointsDroite);
+                Color couleurFondDroite = getCouleurFond(lecteurDroite, imageDroite.getImg(), pointsDroite);
                 Color couleurFormeDroite = getCouleurPlusFrequenteDansForme(lecteurDroite, imageDroite.getImg(), pointsDroite, couleurFondDroite);
     
                 for (int etape = 0; etape <= nombreEtapes; etape++) {
@@ -155,10 +219,21 @@ public class MorphingTask {
         new Thread(tacheMorphing).start();
     }
     
+    /**
+     * Remplit la forme sur l'image intermédiaire avec la couleur appropriée.
+     * 
+     * @autor Thomas BEAUSSART
+     * @param largeur Largeur de l'image
+     * @param hauteur Hauteur de l'image
+     * @param couleurForme Couleur de la forme
+     * @param couleurFond Couleur du fond
+     * @param points Points définissant la forme
+     * @return Tableau de couleurs représentant l'image
+     */
     private Color[][] remplirForme(int largeur, int hauteur, Color couleurForme, Color couleurFond, List<Point> points) {
         points.add(points.get(0));
 
-        List<Point> pointsFinales = CourbeBezier.cBezier(points);
+        List<Point> pointsFinales = CourbeBezier.courbeBezier(points);
 
         Color[][] tabPixel = new Color[largeur][hauteur];
         for (int y = 0; y < hauteur; y++) {
@@ -170,12 +245,17 @@ public class MorphingTask {
                     tabPixel[x][y] = couleurFond;
                 }
             }
-            System.out.println("Y : " + y);
         }
-        System.out.println("Fin remplir forme");
         return tabPixel;
     }
 
+    /**
+     * Effectue le morphing de l'image en utilisant la méthode 3 (triangles de Delaunay).
+     * 
+     * @author Marc DJOLE
+     * @param trianglesGauche Triangles de l'image gauche
+     * @param trianglesDroite Triangles de l'image droite
+     */
     public void morphing3(List<Triangle> trianglesGauche, List<Triangle> trianglesDroite) {
         app.getImagesIntermediaires().clear();
         int nombreEtapes = app.getNombreImagesIntermediaires();
@@ -254,11 +334,19 @@ public class MorphingTask {
         new Thread(tacheMorphing).start();
     }
 
-    public void morphing4(List<Segment> segementsGauche, List<Segment> segmentsDroite, ImageBit imageGauche, ImageBit imageDroite) {
+    /**
+     * Effectue le morphing de l'image en utilisant la méthode 4 (segments).
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param segementsGauche Segments de l'image gauche
+     * @param segmentsDroite Segments de l'image droite
+     * @param imageGauche Image de départ
+     * @param imageDroite Image de destination
+     */
+    public void morphing4(List<Segment> segmentsGauche, List<Segment> segmentsDroite, ImageBit imageGauche, ImageBit imageDroite) {
         app.getImagesIntermediaires().clear();
         int nombreEtapes = app.getNombreImagesIntermediaires();
         double coeff = (double) 1 / nombreEtapes;
-        System.out.println(coeff);
         double dureeEtape = app.getDureeDuGIF() * 1000 / nombreEtapes;
     
         ImageView vueImage = new ImageView();
@@ -270,13 +358,28 @@ public class MorphingTask {
         Task<Void> tacheMorphing = new Task<>() {
             @Override
             public Void call() throws Exception {
+                Point topLeft = new Point(0, 0);
+                Point topRight = new Point(imageGauche.getWidth() - 1, 0);
+                Point bottomLeft = new Point(0, imageGauche.getHeight() - 1);
+                Point bottomRight = new Point(imageGauche.getWidth() - 1, imageGauche.getHeight() - 1);
+                
+                List<Segment> border = new ArrayList<Segment>();
+                border.add(new Segment(topLeft,topRight));
+                border.add(new Segment(topLeft,bottomLeft));
+                border.add(new Segment(bottomLeft,bottomRight));
+                border.add(new Segment(bottomRight,topRight));
+                segmentsGauche.addAll(border);
+                segmentsDroite.addAll(border);
+                
+                FieldMorphing fieldMorphing = new FieldMorphing(convertirListeEnTableau(segmentsGauche), convertirListeEnTableau(segmentsDroite));
     
-                FieldMorphing fieldMorphing = new FieldMorphing(convertirListeEnTableau(segementsGauche), convertirListeEnTableau(segmentsDroite));
-    
-                for (int etape = 0; etape <= nombreEtapes; etape++) {
-
+                for (int etape = 0; etape <= nombreEtapes+1; etape++) {
+                    
                     ImageBit imageIntermediaire = new ImageBit(imageGauche.getImg());
-                    fieldMorphing.morph(imageGauche, imageDroite, imageIntermediaire, etape * coeff);
+                    if(etape<=nombreEtapes)
+                    {
+                        fieldMorphing.morph(imageGauche, imageDroite, imageIntermediaire, etape * coeff);
+                    } else { fieldMorphing.morph(imageGauche, imageDroite, imageIntermediaire, 1); }
     
                     Platform.runLater(() -> {
                         app.getImagesIntermediaires().add(imageIntermediaire);
@@ -284,6 +387,7 @@ public class MorphingTask {
 
                     updateProgress(etape + 1, nombreEtapes);
                 }
+                
                 app.getImageViewer().actualiserVisionneuseImage();
                 return null;
             }
@@ -299,16 +403,36 @@ public class MorphingTask {
         new Thread(tacheMorphing).start();
     }
 
+    /**
+     * Convertit une liste de segments en tableau.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param segmentsList Liste de segments
+     * @return Tableau de segments
+     */
     public Segment[] convertirListeEnTableau(List<Segment> segmentsList) {
         return segmentsList.toArray(new Segment[0]);
     }    
 
+    /**
+     * Crée une barre de progression.
+     * 
+     * @author Anthony GARCIA
+     * @return Barre de progression
+     */
     private ProgressBar creerBarreProgression() {
         ProgressBar barreProgression = new ProgressBar(0);
         barreProgression.setMaxWidth(Double.MAX_VALUE);
         return barreProgression;
     }
 
+    /**
+     * Crée une fenêtre de progression pour la barre de progression.
+     * 
+     * @author Anthony GARCIA
+     * @param barreProgression Barre de progression
+     * @return Stage de progression
+     */
     private Stage creerStageProgression(ProgressBar barreProgression) {
         Stage barreProgressionStage = new Stage();
         barreProgressionStage.setTitle("Progression du morphing");
@@ -325,6 +449,15 @@ public class MorphingTask {
         return barreProgressionStage;
     }
     
+    /**
+     * Interpole les points de contrôle entre deux listes de points.
+     * 
+     * @author Marc DJOLE
+     * @param pointsGauche Points de l'image gauche
+     * @param pointsDroite Points de l'image droite
+     * @param coeff Coefficient d'interpolation
+     * @return Liste de points interpolés
+     */
     private List<Point> interpolerPoints(List<Point> pointsGauche, List<Point> pointsDroite, double coeff) {
         List<Point> pointsIntermediaires = new ArrayList<>();
         for (int i = 0; i < pointsGauche.size(); i++) {
@@ -337,6 +470,15 @@ public class MorphingTask {
         return pointsIntermediaires;
     }
 
+    /**
+     * Remplit le fond de l'image avec une couleur.
+     * 
+     * @author Mattéo REYNE
+     * @param ecrivainPixels Écrivain de pixels
+     * @param largeur Largeur de l'image
+     * @param hauteur Hauteur de l'image
+     * @param couleurFondIntermediaire Couleur du fond
+     */
     private void remplirFond(PixelWriter ecrivainPixels, int largeur, int hauteur, Color couleurFondIntermediaire) {
         for (int y = 0; y < hauteur; y++) {
             for (int x = 0; x < largeur; x++) {
@@ -345,6 +487,15 @@ public class MorphingTask {
         }
     }
 
+    /**
+     * Interpole les triangles entre deux listes de triangles.
+     * 
+     * @author Marc DJOLE
+     * @param trianglesGauche Triangles de l'image gauche
+     * @param trianglesDroite Triangles de l'image droite
+     * @param coefficient Coefficient d'interpolation
+     * @return Liste de triangles interpolés
+     */
     private List<Triangle> interpolerTriangles(List<Triangle> trianglesGauche, List<Triangle> trianglesDroite, double coefficient) {
         List<Triangle> trianglesIntermediaires = new ArrayList<>();
         for (int j = 0; j < trianglesGauche.size(); j++) {
@@ -356,6 +507,14 @@ public class MorphingTask {
         return trianglesIntermediaires;
     }
 
+    /**
+     * Crée un tableau de pixels initialisé à blanc.
+     * 
+     * @author Marc DJOLE
+     * @param largeur Largeur de l'image
+     * @param hauteur Hauteur de l'image
+     * @return Tableau de pixels
+     */
     private Color[][] creerTableauPixelsInitial(int largeur, int hauteur) {
         Color[][] tableauPixels = new Color[largeur][hauteur];
         for (int k = 0; k < largeur; k++) {
@@ -366,9 +525,17 @@ public class MorphingTask {
         return tableauPixels;
     }
 
+    /**
+     * Affiche un aperçu de l'animation de morphing.
+     * 
+     * @author Anthony GARCIA
+     * @param vueImage Vue de l'image
+     * @param nombreEtapes Nombre d'étapes de morphing
+     * @param dureeEtape Durée de chaque étape en millisecondes
+     */
     private void afficherApercuAnimation(ImageView vueImage, int nombreEtapes, double dureeEtape) {
         Stage popupStage = new Stage();
-        popupStage.setTitle("Aperçu de l'animation");
+        popupStage.setTitle("Aperçu du GIF");
 
         StackPane conteneur = new StackPane();
         conteneur.getChildren().add(vueImage);
@@ -388,7 +555,7 @@ public class MorphingTask {
                     for (ImageBit imageBit : app.getImagesIntermediaires()) {
                         bufferedImages.add(SwingFXUtils.fromFXImage(imageBit.getImg(), null));
                     }
-                    GifSequenceWriter.generateGif(bufferedImages, file.getAbsolutePath(), (int) dureeEtape, app.isEstCycle());
+                    GifSequenceWriter.genererGif(bufferedImages, file.getAbsolutePath(), (int) dureeEtape, app.isEstCycle());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -448,8 +615,17 @@ public class MorphingTask {
         chronologie.play();
         popupStage.show();
     }
-  
     
+    /**
+     * Obtient la couleur la plus fréquente dans une forme définie par des points.
+     * 
+     * @author Mattéo REYNE
+     * @param pixelReader Lecteur de pixels
+     * @param image Image à analyser
+     * @param points Points définissant la forme
+     * @param couleurFond Couleur de fond à ignorer
+     * @return Couleur la plus fréquente dans la forme
+     */
     private static Color getCouleurPlusFrequenteDansForme(PixelReader pixelReader, Image image, List<Point> points, Color couleurFond) {
         Map<Color, Integer> compteurCouleurs = new HashMap<>();
 
@@ -473,28 +649,59 @@ public class MorphingTask {
                 .orElse(Color.BLACK);
     }
 
-    public static Color getCouleurPlusFrequente(PixelReader pixelReader, Image image, List<Point> points) {
+    /**
+     * Obtient la couleur de fond d'une image.
+     * 
+     * @author Thomas BEAUSSART
+     * @param pixelReader Lecteur de pixels
+     * @param image Image à analyser
+     * @param points Points définissant la forme
+     * @return Couleur de fond de l'image
+     */
+    public static Color getCouleurFond(PixelReader pixelReader, Image image, List<Point> points) {
         Map<Color, Integer> compteurCouleurs = new HashMap<>();
 
         int width = (int) image.getWidth();
         int height = (int) image.getHeight();
 
+        Color color;
         for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                if (!pointDansPolygone(x, y, points)) {
-                    Color color = pixelReader.getColor(x, y);
-
-                    compteurCouleurs.put(color, compteurCouleurs.getOrDefault(color, 0) + 1);
-                }
+            if (!pointDansPolygone(0, y, points)) {
+                color = pixelReader.getColor(0, y);
+                compteurCouleurs.put(color, compteurCouleurs.getOrDefault(color, 0) + 1);
+            }
+            if (!pointDansPolygone( width-1, y, points)) {
+                color = pixelReader.getColor(width-1, y);
+                compteurCouleurs.put(color, compteurCouleurs.getOrDefault(color, 0) + 1);
             }
         }
+        for (int x = 0; x < width; x++) {
+            if (!pointDansPolygone(x, 0, points)) {
+                color = pixelReader.getColor(x, 0);
+                compteurCouleurs.put(color, compteurCouleurs.getOrDefault(color, 0) + 1);
+            }
+            if (!pointDansPolygone(x,height-1, points)) {
+                color = pixelReader.getColor(x, height-1);
+                compteurCouleurs.put(color, compteurCouleurs.getOrDefault(color, 0) + 1);
+            }
+        }
+
 
         return compteurCouleurs.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(Color.BLACK);
+
     }
 
+    /**
+     * Remplit une forme définie par des points avec une couleur.
+     * 
+     * @author Mattéo REYNE
+     * @param ecrivainPixels Écrivain de pixels
+     * @param points Points définissant la forme
+     * @param couleur Couleur à utiliser pour remplir la forme
+     */
     private static void remplirForme(PixelWriter ecrivainPixels, List<Point> points, Color couleur) {
         double minX = points.stream().mapToDouble(Point::getX).min().orElse(0);
         double maxX = points.stream().mapToDouble(Point::getX).max().orElse(Double.MAX_VALUE);
@@ -510,6 +717,15 @@ public class MorphingTask {
         }
     }
 
+    /**
+     * Vérifie si un point est à l'intérieur d'un polygone défini par des points.
+     * 
+     * @author Marc DJOLE
+     * @param x Coordonnée x du point
+     * @param y Coordonnée y du point
+     * @param points Points définissant le polygone
+     * @return true si le point est à l'intérieur du polygone, false sinon
+     */
     private static boolean pointDansPolygone(int x, int y, List<Point> points) {
         boolean result = false;
         int j = points.size() - 1;
@@ -523,6 +739,13 @@ public class MorphingTask {
         return result;
     }
 
+    /**
+     * Crée une image à partir d'un tableau de pixels.
+     * 
+     * @author Mattéo REYNE
+     * @param tabPixels Tableau de pixels
+     * @return Image créée
+     */
     private Image creerImageDepuisTableau(Color[][] tabPixels) {
         WritableImage writableImage = new WritableImage(app.getLargeurImageOriginale(), app.getHauteurImageOriginale());
         PixelWriter pixelWriter = writableImage.getPixelWriter();

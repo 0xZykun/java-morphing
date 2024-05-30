@@ -1,21 +1,62 @@
 package cytech.morphing;
 
+/*
+ * see import javafx.scene.canvas.Canvas;
+ * see import javafx.scene.input.MouseButton;
+ *
+ * see import java.util.ArrayList;
+ * see import java.util.List;
+ */
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe PointControle pour gérer les points de contrôle sur les canevas.
+ * 
+ */
 public class PointControle {
+    /**
+     * Référence à l'application principale.
+     */
     private MorphingFx app;
+
+    /**
+     * Liste des points de contrôle sur le canevas gauche.
+     */
     private List<Point> pointsGauche = new ArrayList<>();
+
+    /**
+     * Liste des points de contrôle sur le canevas droit.
+     */
     private List<Point> pointsDroite = new ArrayList<>();
+
+    /**
+     * Index du point sélectionné.
+     */
     private int indexSelectionne = -1;
 
+    /**
+     * Constructeur pour initialiser PointControle avec l'application principale.
+     * 
+     * @autor Mattéo REYNE
+     * @param app l'application principale MorphingFx
+     */
     public PointControle(MorphingFx app) {
         this.app = app;
     }
 
+    /**
+     * Configure les événements de souris pour le canevas et les points de contrôle.
+     * 
+     * @autor Mattéo REYNE
+     * @param canevas le canevas à configurer
+     * @param points la liste des points de contrôle pour ce canevas
+     * @param canevasOppose le canevas opposé à configurer
+     * @param pointsOppose la liste des points de contrôle pour le canevas opposé
+     */
     public void configurerCanevas(Canvas canevas, List<Point> points, Canvas canevasOppose, List<Point> pointsOppose) {
         canevas.setOnMousePressed(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -49,6 +90,17 @@ public class PointControle {
         });
     }
 
+    /**
+     * Ajoute un point aux listes de points de contrôle pour les deux canevas.
+     * 
+     * @autor Mattéo REYNE
+     * @param x coordonnée x du point à ajouter
+     * @param y coordonnée y du point à ajouter
+     * @param points liste des points de contrôle du canevas actuel
+     * @param pointsOppose liste des points de contrôle du canevas opposé
+     * @param canevas le canevas actuel
+     * @param canevasOppose le canevas opposé
+     */
     private void ajouterPoint(double x, double y, List<Point> points, List<Point> pointsOppose, Canvas canevas, Canvas canevasOppose) {
         Point point = new Point(x, y);
 
@@ -83,6 +135,15 @@ public class PointControle {
         }
     }
 
+    /**
+     * Trouve l'index du point de contrôle le plus proche des coordonnées spécifiées.
+     * 
+     * @autor Mattéo REYNE
+     * @param x coordonnée x à vérifier
+     * @param y coordonnée y à vérifier
+     * @param points liste des points de contrôle
+     * @return l'index du point le plus proche, ou -1 si aucun point n'est trouvé
+     */
     private int trouverIndexPoint(double x, double y, List<Point> points) {
         for (int i = 0; i < points.size(); i++) {
             Point point = points.get(i);
@@ -93,6 +154,11 @@ public class PointControle {
         return -1;
     }
 
+    /**
+     * Efface tous les points de contrôle des canevas.
+     * 
+     * @autor Mattéo REYNE
+     */
     public void clearPoints() {
         pointsGauche.clear();
         pointsDroite.clear();
@@ -101,6 +167,13 @@ public class PointControle {
         app.getTriangleControle().redessinerCanevas(app.getImageLoader().getCanevasDroite(), pointsDroite, app.getImageLoader().getImageDroite());
     }
 
+    /**
+     * Ajoute des points aux coins du canevas.
+     * 
+     * @autor Mattéo REYNE
+     * @param points liste des points de contrôle
+     * @param canevas le canevas actuel
+     */
     public void ajouterPointsBordure(List<Point> points, Canvas canevas) {
         points.add(new Point(0, canevas.getHeight() * (app.getHauteurImageOriginale() - 1) / app.getHauteurImageOriginale()));
         points.add(new Point(0, 0));
@@ -108,6 +181,12 @@ public class PointControle {
         points.add(new Point(canevas.getWidth() * (app.getLargeurImageOriginale() - 1) / app.getLargeurImageOriginale(), canevas.getHeight() * (app.getHauteurImageOriginale() - 1) / app.getHauteurImageOriginale()));
     }
 
+    /**
+     * Enlève les points aux coins du canevas.
+     * 
+     * @autor Mattéo REYNE
+     * @param points liste des points de contrôle
+     */
     public void enleverPointsBordure(List<Point> points) {
         for (int i = 0; i < 4; i++) {
             if (!points.isEmpty()) {
@@ -116,6 +195,11 @@ public class PointControle {
         }
     }
 
+    /**
+     * Ajoute un point au centre des canevas.
+     * 
+     * @autor Mattéo REYNE
+     */
     public void ajouterPointCentre() {
         if (app.getChoixMethode() == 2 && !app.getPointControle().getPointsDroite().isEmpty()) {
             double xGauche = app.getImageLoader().getCanevasGauche().getWidth() / 2;
@@ -139,6 +223,11 @@ public class PointControle {
         }
     }
 
+    /**
+     * Supprime le dernier point de contrôle ajouté.
+     * 
+     * @autor Mattéo REYNE
+     */
     public void supprimerDernierPoint() {
         if (!pointsGauche.isEmpty()) {
             pointsGauche.remove(pointsGauche.size() - 1);
@@ -164,18 +253,42 @@ public class PointControle {
         }
     }
 
+    /**
+     * Retourne la liste des points de contrôle du canevas gauche.
+     * 
+     * @autor Mattéo REYNE
+     * @return liste des points de contrôle du canevas gauche
+     */
     public List<Point> getPointsGauche() {
         return pointsGauche;
     }
 
+    /**
+     * Définit la liste des points de contrôle du canevas gauche.
+     * 
+     * @autor Mattéo REYNE
+     * @param pointsGauche nouvelle liste des points de contrôle du canevas gauche
+     */
     public void setPointsGauche(List<Point> pointsGauche) {
         this.pointsGauche = pointsGauche;
     }
 
+    /**
+     * Retourne la liste des points de contrôle du canevas droit.
+     * 
+     * @autor Mattéo REYNE
+     * @return liste des points de contrôle du canevas droit
+     */
     public List<Point> getPointsDroite() {
         return pointsDroite;
     }
 
+    /**
+     * Définit la liste des points de contrôle du canevas droit.
+     * 
+     * @autor Mattéo REYNE
+     * @param pointsDroite nouvelle liste des points de contrôle du canevas droit
+     */
     public void setPointsDroite(List<Point> pointsDroite) {
         this.pointsDroite = pointsDroite;
     }

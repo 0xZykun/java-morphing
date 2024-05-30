@@ -1,5 +1,15 @@
 package cytech.morphing;
 
+/*
+ * see import javafx.scene.canvas.Canvas;
+ * see import javafx.scene.canvas.GraphicsContext;
+ * see import javafx.scene.image.Image;
+ * see import javafx.scene.input.MouseButton;
+ * see import javafx.scene.paint.Color;
+ *
+ * see import java.util.ArrayList;
+ * see import java.util.List;
+ */
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -9,17 +19,57 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SegmentControle {
-    private MorphingFx app;
-    private List<Segment> segmentsGauche = new ArrayList<>();
-    private List<Segment> segmentsDroite = new ArrayList<>();
-    private int indexSelectionne = -1;
-    private Point pointTemp = null; // Temporarily stores the first point of a segment
 
+/**
+ * Classe SegmentControle pour gérer les segments sur les canevas.
+ * 
+ * @autor Ruben PETTENG NGONGANG
+ */
+public class SegmentControle {
+    /**
+     * Référence à l'application principale.
+     */
+    private MorphingFx app;
+
+    /**
+     * Liste des segments sur le canevas gauche.
+     */
+    private List<Segment> segmentsGauche = new ArrayList<>();
+
+    /**
+     * Liste des segments sur le canevas droit.
+     */
+    private List<Segment> segmentsDroite = new ArrayList<>();
+
+    /**
+     * Index du segment sélectionné.
+     */
+    private int indexSelectionne = -1;
+
+    /**
+     * Point temporaire pour stocker le premier point d'un segment.
+     */
+    private Point pointTemp = null;
+
+    /**
+     * Constructeur pour initialiser SegmentControle avec l'application principale.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param app l'application principale MorphingFx
+     */
     public SegmentControle(MorphingFx app) {
         this.app = app;
     }
 
+    /**
+     * Configure les événements de souris pour les segments sur le canevas.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param canevas le canevas à configurer
+     * @param segments liste des segments pour ce canevas
+     * @param canevasOppose le canevas opposé à configurer
+     * @param segmentsOppose liste des segments pour le canevas opposé
+     */
     public void configurerCanevasSegment(Canvas canevas, List<Segment> segments, Canvas canevasOppose, List<Segment> segmentsOppose) {
         canevas.setOnMousePressed(e -> {
             if (e.getButton() == MouseButton.PRIMARY) {
@@ -53,6 +103,7 @@ public class SegmentControle {
                             segments.add(new Segment(pointTemp, secondPoint));
                             segmentsOppose.add(new Segment(pointTemp, secondPoint));
                             pointTemp = null;
+                            app.getImageLoader().actualiserEtatBoutons();
                             redessinerCanevasSegments(canevas, segments, canevas == app.getImageLoader().getCanevasGauche() ? app.getImageLoader().getImageGauche() : app.getImageLoader().getImageDroite());
                             redessinerCanevasSegments(canevasOppose, segmentsOppose, canevasOppose == app.getImageLoader().getCanevasGauche() ? app.getImageLoader().getImageGauche() : app.getImageLoader().getImageDroite());
                         }
@@ -67,6 +118,14 @@ public class SegmentControle {
         });
     }
 
+    /**
+     * Redessine les segments sur le canevas.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param canevas le canevas à redessiner
+     * @param segments liste des segments à dessiner
+     * @param image image de fond à dessiner
+     */
     public void redessinerCanevasSegments(Canvas canevas, List<Segment> segments, Image image) {
         GraphicsContext gc = canevas.getGraphicsContext2D();
         gc.clearRect(0, 0, canevas.getWidth(), canevas.getHeight());
@@ -80,8 +139,15 @@ public class SegmentControle {
         dessinerSegments(gc, segments);
     }
 
+    /**
+     * Dessine les segments sur le GraphicsContext.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param gc le GraphicsContext sur lequel dessiner
+     * @param segments liste des segments à dessiner
+     */
     private void dessinerSegments(GraphicsContext gc, List<Segment> segments) {
-        List<Color> couleurs = ColorGenerateur.genererCouleursDifferentes(15);
+        List<Color> couleurs = CouleurGenerateur.genererCouleursDifferentes(15);
 
         for (int i = 0; i < segments.size(); i++) {
             Segment segment = segments.get(i);
@@ -100,6 +166,11 @@ public class SegmentControle {
         }
     }
 
+    /**
+     * Ajoute un nouveau segment.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     */
     public void ajouterSegment() {
         double largeur = app.getImageLoader().getCanevasGauche().getWidth();
         double hauteur = app.getImageLoader().getCanevasGauche().getHeight();
@@ -117,6 +188,11 @@ public class SegmentControle {
         app.getImageLoader().actualiserEtatBoutons();
     }
 
+    /**
+     * Supprime le dernier segment ajouté.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     */
     public void supprimerSegment() {
         if (!segmentsDroite.isEmpty()) {
             segmentsDroite.remove(segmentsDroite.size() - 1);
@@ -128,6 +204,15 @@ public class SegmentControle {
         }
     }
 
+    /**
+     * Trouve l'index du point de segment le plus proche des coordonnées spécifiées.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param x coordonnée x à vérifier
+     * @param y coordonnée y à vérifier
+     * @param segments liste des segments
+     * @return l'index du point de segment le plus proche, ou -1 si aucun point n'est trouvé
+     */
     private int trouverIndexPointSegment(double x, double y, List<Segment> segments) {
         for (int i = 0; i < segments.size(); i++) {
             Segment segment = segments.get(i);
@@ -142,6 +227,11 @@ public class SegmentControle {
         return -1;
     }
 
+    /**
+     * Efface tous les segments des canevas.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     */
     public void clearSegments() {
         segmentsGauche.clear();
         segmentsDroite.clear();
@@ -150,22 +240,51 @@ public class SegmentControle {
         redessinerCanevasSegments(app.getImageLoader().getCanevasDroite(), segmentsDroite, app.getImageLoader().getImageDroite());
     }
 
+    /**
+     * Retourne la liste des segments du canevas gauche.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return liste des segments du canevas gauche
+     */
     public List<Segment> getSegmentsGauche() {
         return segmentsGauche;
     }
 
+    /**
+     * Définit la liste des segments du canevas gauche.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param segmentsGauche nouvelle liste des segments du canevas gauche
+     */
     public void setSegmentsGauche(List<Segment> segmentsGauche) {
         this.segmentsGauche = segmentsGauche;
     }
 
+    /**
+     * Retourne la liste des segments du canevas droit.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @return liste des segments du canevas droit
+     */
     public List<Segment> getSegmentsDroite() {
         return segmentsDroite;
     }
 
+    /**
+     * Définit la liste des segments du canevas droit.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     * @param segmentsDroite nouvelle liste des segments du canevas droit
+     */
     public void setSegmentsDroite(List<Segment> segmentsDroite) {
         this.segmentsDroite = segmentsDroite;
     }
 
+    /**
+     * Réinitialise le point temporaire utilisé pour créer un segment.
+     * 
+     * @autor Ruben PETTENG NGONGANG
+     */
     public void resetPointTemp() {
         pointTemp = null;
     }

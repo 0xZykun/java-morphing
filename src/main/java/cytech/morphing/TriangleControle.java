@@ -1,5 +1,14 @@
 package cytech.morphing;
 
+/*
+ * see import javafx.scene.canvas.Canvas;
+ * see import javafx.scene.canvas.GraphicsContext;
+ * see import javafx.scene.image.Image;
+ * see import javafx.scene.paint.Color;
+ *
+ * see import java.util.ArrayList;
+ * see import java.util.List;
+ */
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -8,15 +17,44 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe qui gère le contrôle des triangles dans l'application de morphing.
+ * 
+ */
 public class TriangleControle {
+    /**
+     * Instance de l'application principale.
+     */
     private MorphingFx app;
+
+    /**
+     * Liste des triangles pour l'image gauche.
+     */
     private List<Triangle> listeTriangleGauche = new ArrayList<>();
+
+    /**
+     * Liste des triangles pour l'image droite.
+     */
     private List<Triangle> listeTriangleDroite = new ArrayList<>();
 
+    /**
+     * Constructeur de la classe TriangleControle.
+     * 
+     * @autor Mattéo REYNE
+     * @param app Instance de l'application principale
+     */
     public TriangleControle(MorphingFx app) {
         this.app = app;
     }
 
+    /**
+     * Redessine le canevas avec les points et les triangles.
+     * 
+     * @autor Mattéo REYNE
+     * @param canevas Canvas à redessiner
+     * @param points Liste des points à dessiner
+     * @param image Image à dessiner sur le canevas
+     */
     public void redessinerCanevas(Canvas canevas, List<Point> points, Image image) {
         GraphicsContext gc = canevas.getGraphicsContext2D();
         gc.clearRect(0, 0, canevas.getWidth(), canevas.getHeight());
@@ -53,6 +91,13 @@ public class TriangleControle {
         dessinerPoints(gc, points);
     }
 
+    /**
+     * Dessine les lignes reliant les points sur le canevas.
+     * 
+     * @autor Mattéo REYNE
+     * @param gc Contexte graphique pour dessiner
+     * @param points Liste des points à relier
+     */
     private void dessinerLignes(GraphicsContext gc, List<Point> points) {
         Point pointPrecedent = null;
         Color selectedColor = app.getControle().getCouleurLignes().getValue();
@@ -73,16 +118,27 @@ public class TriangleControle {
         }
     }
 
+    /**
+     * Dessine les points sur le canevas.
+     * 
+     * @autor Mattéo REYNE
+     * @param gc Contexte graphique pour dessiner
+     * @param points Liste des points à dessiner
+     */
     private void dessinerPoints(GraphicsContext gc, List<Point> points) {
-        List<Color> couleurs = ColorGenerateur.genererCouleursDifferentes(15);
+        List<Color> couleurs = CouleurGenerateur.genererCouleursDifferentes(15);
 
         for (int i = 0; i < points.size(); i++) {
             Point point = points.get(i);
             Color couleur;
-            if ((i % 3 == 1 || i % 3 == 2) && app.getChoixMethode() == 2) {
-                couleur = app.getControle().getCouleurPoints().getValue();
+            if (app.getChoixMethode() != 2) {
+                couleur = couleurs.get(i % couleurs.size());
             } else {
-                couleur = couleurs.get(i / 3 % couleurs.size());
+                if ((i % 3 == 1 || i % 3 == 2) && app.getChoixMethode() == 2) {
+                    couleur = app.getControle().getCouleurPoints().getValue();
+                } else {
+                    couleur = couleurs.get(i / 3 % couleurs.size());
+                }
             }
 
             gc.setFill(couleur);
@@ -90,6 +146,11 @@ public class TriangleControle {
         }
     }
 
+    /**
+     * Met à jour les triangles Delaunay et redessine le canevas.
+     * 
+     * @autor Mattéo REYNE
+     */
     public void mettreAJourTrianglesEtDessiner() {
         if (app.getPointControle().getPointsGauche().size() >= 3) {
             generateDelaunayTriangles();
@@ -99,6 +160,11 @@ public class TriangleControle {
         redessinerCanevas(app.getImageLoader().getCanevasDroite(), app.getPointControle().getPointsDroite(), app.getImageLoader().getImageDroite());
     }
 
+    /**
+     * Génère les triangles Delaunay pour les points actuels.
+     * 
+     * @autor Mattéo REYNE
+     */
     public void generateDelaunayTriangles() {
         listeTriangleDroite.clear();
         listeTriangleGauche.clear();
@@ -138,24 +204,57 @@ public class TriangleControle {
         }
     }
 
+    /**
+     * Vérifie si un triangle a un sommet dans un coin de l'image.
+     * 
+     * @autor Mattéo REYNE
+     * @param triangle Triangle à vérifier
+     * @param width Largeur de l'image
+     * @param height Hauteur de l'image
+     * @return true si un sommet est dans un coin, false sinon
+     */
     private boolean estTriangleCoin(Triangle triangle, double width, double height) {
         return (triangle.getA().estAuCoin((int) width, (int) height) ||
                 triangle.getB().estAuCoin((int) width, (int) height) ||
                 triangle.getC().estAuCoin((int) width, (int) height));
     }
 
+    /**
+     * Getter pour la liste des triangles de l'image gauche.
+     * 
+     * @autor Mattéo REYNE
+     * @return Liste des triangles de l'image gauche
+     */
     public List<Triangle> getListeTriangleGauche() {
         return listeTriangleGauche;
     }
 
+    /**
+     * Setter pour la liste des triangles de l'image gauche.
+     * 
+     * @autor Mattéo REYNE
+     * @param listeTriangleGauche Nouvelle liste des triangles de l'image gauche
+     */
     public void setListeTriangleGauche(List<Triangle> listeTriangleGauche) {
         this.listeTriangleGauche = listeTriangleGauche;
     }
 
+    /**
+     * Getter pour la liste des triangles de l'image droite.
+     * 
+     * @autor Mattéo REYNE
+     * @return Liste des triangles de l'image droite
+     */
     public List<Triangle> getListeTriangleDroite() {
         return listeTriangleDroite;
     }
 
+    /**
+     * Setter pour la liste des triangles de l'image droite.
+     * 
+     * @autor Mattéo REYNE
+     * @param listeTriangleDroite Nouvelle liste des triangles de l'image droite
+     */
     public void setListeTriangleDroite(List<Triangle> listeTriangleDroite) {
         this.listeTriangleDroite = listeTriangleDroite;
     }
