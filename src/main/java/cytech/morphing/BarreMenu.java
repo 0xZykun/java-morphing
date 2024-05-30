@@ -69,7 +69,7 @@ public class BarreMenu {
      * 
      * @autor Mattéo REYNE
      */
-    public void appliquerPreset1() {
+    public void appliquerPreset1() throws IOException{
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -139,7 +139,7 @@ public class BarreMenu {
      * 
      * @autor Mattéo REYNE
      */
-    public void appliquerPreset2() {
+    public void appliquerPreset2() throws IOException{
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -215,7 +215,7 @@ public class BarreMenu {
      * 
      * @autor Mattéo REYNE
      */
-    public void appliquerPreset3() {
+    public void appliquerPreset3() throws IOException{
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -299,7 +299,7 @@ public class BarreMenu {
      * 
      * @autor Mattéo REYNE
      */
-    public void appliquerPreset4() {
+    public void appliquerPreset4() throws IOException{
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
