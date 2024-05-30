@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.paint.Color;
  *
@@ -20,7 +18,7 @@ public class CouleurGenerateur {
 	/**
      * Génère une liste de couleurs différentes.
      *
-     * @autor Anthony Garcia
+     * @author Anthony Garcia
      * @param nombre le nombre de couleurs à générer
      * @return une liste de couleurs différentes
      */

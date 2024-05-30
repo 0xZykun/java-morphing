@@ -1,21 +1,16 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.control.*;
  * 
  * see import java.util.ArrayList;
  * see import java.util.Arrays;
  * see import java.util.List;
- * see import java.io.File;
- * see import java.io.IOException;
  */
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.io.File;
-import java.io.IOException;
+
 /**
  * Classe BarreMenu pour gérer les menus de l'application MorphingFx.
  * 
@@ -35,7 +30,7 @@ public class BarreMenu {
      * Constructeur de la classe BarreMenu.
      * Initialise les menus et leurs actions.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param app l'application principale MorphingFx
      */
     public BarreMenu(MorphingFx app) {
@@ -70,9 +65,9 @@ public class BarreMenu {
     /**
      * Applique le preset 1: Carré en croix avec formes simples.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
-    public void appliquerPreset1() throws IOException{
+    public void appliquerPreset1() {
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -84,9 +79,8 @@ public class BarreMenu {
 
         app.getControle().miseJourControle(1);
 
-        String currentPath = new java.io.File(".").getCanonicalPath();
-        String cheminImageGauche = currentPath + "/src/main/resources/images/square.png";
-        String cheminImageDroite = currentPath + "/src/main/resources/images/cross.png";
+        String cheminImageGauche = "square.png";
+        String cheminImageDroite = "cross.png";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -140,9 +134,9 @@ public class BarreMenu {
     /**
      * Applique le preset 2: Cercle en etoile avec formes arrondies.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
-    public void appliquerPreset2() throws IOException{
+    public void appliquerPreset2() {
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -155,9 +149,8 @@ public class BarreMenu {
         app.getControle().miseJourControle(2);
         app.getControle().getFinirForme().setSelected(true);
 
-        String currentPath = new java.io.File(".").getCanonicalPath();
-        String cheminImageGauche = currentPath + "/src/main/resources/images/circle.png";
-        String cheminImageDroite = currentPath + "/src/main/resources/images/star.png";
+        String cheminImageGauche = "circle.png";
+        String cheminImageDroite = "star.png";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -216,9 +209,9 @@ public class BarreMenu {
     /**
      * Applique le preset 3: Visages masculins avec triangles.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
-    public void appliquerPreset3() throws IOException{
+    public void appliquerPreset3() {
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -230,9 +223,8 @@ public class BarreMenu {
 
         app.getControle().miseJourControle(3);
 
-        String currentPath = new java.io.File(".").getCanonicalPath();
-        String cheminImageGauche = currentPath + "/src/main/resources/images/bg1.jpg";
-        String cheminImageDroite = currentPath + "/src/main/resources/images/bg2.jpg";
+        String cheminImageGauche = "bg1.jpg";
+        String cheminImageDroite = "bg2.jpg";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -300,9 +292,9 @@ public class BarreMenu {
     /**
      * Applique le preset 4: Visages feminins avec triangles.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
-    public void appliquerPreset4() throws IOException{
+    public void appliquerPreset4() {
         app.setHauteurImageOriginale(0);
         app.setLargeurImageOriginale(0);
         app.getImageLoader().effacerCanevas("gauche");
@@ -314,9 +306,8 @@ public class BarreMenu {
 
         app.getControle().miseJourControle(4);
 
-        String currentPath = new java.io.File(".").getCanonicalPath();
-        String cheminImageGauche = currentPath + "/src/main/resources/images/bg3.jpg";
-        String cheminImageDroite = currentPath + "/src/main/resources/images/bg4.jpg";
+        String cheminImageGauche = "bg3.jpg";
+        String cheminImageDroite = "bg4.jpg";
         app.getImageLoader().chargerImage(cheminImageGauche, 0);
         app.getImageLoader().chargerImage(cheminImageDroite, 1);
 
@@ -373,7 +364,7 @@ public class BarreMenu {
     /**
      * Retourne la barre de menus.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la barre de menus
      */
     public MenuBar getMenuBar() {

@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.application.Application;
  * see import javafx.geometry.Rectangle2D;
@@ -137,7 +135,7 @@ public class MorphingFx extends Application {
     /**
      * Point d'entrée principal pour l'application.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param primaryStage la scène principale de l'application
      */
     @Override
@@ -177,7 +175,7 @@ public class MorphingFx extends Application {
     /**
      * Ouvre une boîte de dialogue pour configurer les options du GIF.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void ouvrirDialogueOptions() {
         Dialog<ButtonType> dialogue = new Dialog<>();
@@ -385,7 +383,7 @@ public class MorphingFx extends Application {
     /**
      * Ajuste les points d'un canevas aux dimensions originales de l'image.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param points la liste des points à ajuster
      * @param largeurCanvas la largeur du canevas
      * @param hauteurCanvas la hauteur du canevas
@@ -411,7 +409,7 @@ public class MorphingFx extends Application {
     /**
      * Ajuste les triangles d'un canevas aux dimensions originales de l'image.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param triangles la liste des triangles à ajuster
      * @param canvasWidth la largeur du canevas
      * @param canvasHeight la hauteur du canevas
@@ -442,7 +440,7 @@ public class MorphingFx extends Application {
     /**
      * Ajuste les segments d'un canevas aux dimensions originales de l'image.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param segments la liste des segments à ajuster
      * @param canvasWidth la largeur du canevas
      * @param canvasHeight la hauteur du canevas
@@ -470,7 +468,7 @@ public class MorphingFx extends Application {
     // Getters et setters pour les variables d'instance
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la scène principale de l'application
      */
     public Stage getPrimaryStage() {
@@ -478,7 +476,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la largeur de la scène
      */
     public double getLargeurScene() {
@@ -486,7 +484,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la hauteur de la scène
      */
     public double getHauteurScene() {
@@ -494,7 +492,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le chargeur d'images
      */
     public ImageLoader getImageLoader() {
@@ -502,7 +500,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le contrôleur des points
      */
     public PointControle getPointControle() {
@@ -510,7 +508,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le contrôleur des segments
      */
     public SegmentControle getSegmentControle() {
@@ -518,7 +516,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le contrôleur des triangles
      */
     public TriangleControle getTriangleControle() {
@@ -526,7 +524,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le visualiseur d'images
      */
     public ImageViewer getImageViewer() {
@@ -534,7 +532,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la tâche de morphing
      */
     public MorphingTask getMorphingTask() {
@@ -542,7 +540,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le contrôleur principal
      */
     public Controle getControle() {
@@ -550,7 +548,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return l'index de l'étape courante
      */
     public int getIndexEtapeCourante() {
@@ -560,7 +558,7 @@ public class MorphingFx extends Application {
     /**
      * Définit l'index de l'étape courante.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param indexEtapeCourante l'index de l'étape courante à définir
      */
     public void setIndexEtapeCourante(int indexEtapeCourante) {
@@ -568,7 +566,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la liste des images intermédiaires
      */
     public List<ImageBit> getImagesIntermediaires() {
@@ -578,7 +576,7 @@ public class MorphingFx extends Application {
     /**
      * Définit la liste des images intermédiaires.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param imagesIntermediaires la liste des images intermédiaires à définir
      */
     public void setImagesIntermediaires(List<ImageBit> imagesIntermediaires) {
@@ -586,7 +584,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la largeur de l'image originale
      */
     public int getLargeurImageOriginale() {
@@ -596,7 +594,7 @@ public class MorphingFx extends Application {
     /**
      * Définit la largeur de l'image originale.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param largeurImageOriginale la largeur de l'image originale à définir
      */
     public void setLargeurImageOriginale(int largeurImageOriginale) {
@@ -604,7 +602,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la hauteur de l'image originale
      */
     public int getHauteurImageOriginale() {
@@ -614,7 +612,7 @@ public class MorphingFx extends Application {
     /**
      * Définit la hauteur de l'image originale.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param hauteurImageOriginale la hauteur de l'image originale à définir
      */
     public void setHauteurImageOriginale(int hauteurImageOriginale) {
@@ -622,7 +620,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return vrai si le cycle est activé, faux sinon
      */
     public boolean isEstCycle() {
@@ -632,7 +630,7 @@ public class MorphingFx extends Application {
     /**
      * Définit l'état du cycle.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param estCycle l'état du cycle à définir
      */
     public void setEstCycle(boolean estCycle) {
@@ -640,7 +638,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le nombre d'images intermédiaires
      */
     public int getNombreImagesIntermediaires() {
@@ -650,7 +648,7 @@ public class MorphingFx extends Application {
     /**
      * Définit le nombre d'images intermédiaires.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param nombreImagesIntermediaires le nombre d'images intermédiaires à définir
      */
     public void setNombreImagesIntermediaires(int nombreImagesIntermediaires) {
@@ -658,7 +656,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la durée du GIF en secondes
      */
     public int getDureeDuGIF() {
@@ -668,7 +666,7 @@ public class MorphingFx extends Application {
     /**
      * Définit la durée du GIF en secondes.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param dureeDuGIF la durée du GIF à définir
      */
     public void setDureeDuGIF(int dureeDuGIF) {
@@ -676,7 +674,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la liste des images d'origine
      */
     public List<ImageBit> getImagesOrigines() {
@@ -686,7 +684,7 @@ public class MorphingFx extends Application {
     /**
      * Définit la liste des images d'origine.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param imagesOrigines la liste des images d'origine à définir
      */
     public void setImagesOrigines(List<ImageBit> imagesOrigines) {
@@ -694,7 +692,7 @@ public class MorphingFx extends Application {
     }
 
     /**
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le choix de la méthode de morphing
      */
     public int getChoixMethode() {
@@ -704,7 +702,7 @@ public class MorphingFx extends Application {
     /**
      * Définit le choix de la méthode de morphing.
      *
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param choixMethode le choix de la méthode de morphing à définir
      */
     public void setChoixMethode(int choixMethode) {

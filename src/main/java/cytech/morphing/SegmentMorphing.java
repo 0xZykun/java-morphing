@@ -1,6 +1,4 @@
-package cytech.morphing;
-
-public class SegmentMorphing
+public class SegmentMorphing 
 {
 	private Segment[] s_src; //segments définis sur l'image source
 	private Segment[] s_dest; //segments définis sur l'image de destination

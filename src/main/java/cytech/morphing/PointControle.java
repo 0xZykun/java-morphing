@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.canvas.Canvas;
  * see import javafx.scene.input.MouseButton;
@@ -41,7 +39,7 @@ public class PointControle {
     /**
      * Constructeur pour initialiser PointControle avec l'application principale.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param app l'application principale MorphingFx
      */
     public PointControle(MorphingFx app) {
@@ -51,7 +49,7 @@ public class PointControle {
     /**
      * Configure les événements de souris pour le canevas et les points de contrôle.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param canevas le canevas à configurer
      * @param points la liste des points de contrôle pour ce canevas
      * @param canevasOppose le canevas opposé à configurer
@@ -93,7 +91,7 @@ public class PointControle {
     /**
      * Ajoute un point aux listes de points de contrôle pour les deux canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param x coordonnée x du point à ajouter
      * @param y coordonnée y du point à ajouter
      * @param points liste des points de contrôle du canevas actuel
@@ -138,7 +136,7 @@ public class PointControle {
     /**
      * Trouve l'index du point de contrôle le plus proche des coordonnées spécifiées.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param x coordonnée x à vérifier
      * @param y coordonnée y à vérifier
      * @param points liste des points de contrôle
@@ -157,7 +155,7 @@ public class PointControle {
     /**
      * Efface tous les points de contrôle des canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void clearPoints() {
         pointsGauche.clear();
@@ -170,7 +168,7 @@ public class PointControle {
     /**
      * Ajoute des points aux coins du canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param points liste des points de contrôle
      * @param canevas le canevas actuel
      */
@@ -184,7 +182,7 @@ public class PointControle {
     /**
      * Enlève les points aux coins du canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param points liste des points de contrôle
      */
     public void enleverPointsBordure(List<Point> points) {
@@ -198,7 +196,7 @@ public class PointControle {
     /**
      * Ajoute un point au centre des canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void ajouterPointCentre() {
         if (app.getChoixMethode() == 2 && !app.getPointControle().getPointsDroite().isEmpty()) {
@@ -226,7 +224,7 @@ public class PointControle {
     /**
      * Supprime le dernier point de contrôle ajouté.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void supprimerDernierPoint() {
         if (!pointsGauche.isEmpty()) {
@@ -256,7 +254,7 @@ public class PointControle {
     /**
      * Retourne la liste des points de contrôle du canevas gauche.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return liste des points de contrôle du canevas gauche
      */
     public List<Point> getPointsGauche() {
@@ -266,7 +264,7 @@ public class PointControle {
     /**
      * Définit la liste des points de contrôle du canevas gauche.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param pointsGauche nouvelle liste des points de contrôle du canevas gauche
      */
     public void setPointsGauche(List<Point> pointsGauche) {
@@ -276,7 +274,7 @@ public class PointControle {
     /**
      * Retourne la liste des points de contrôle du canevas droit.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return liste des points de contrôle du canevas droit
      */
     public List<Point> getPointsDroite() {
@@ -286,7 +284,7 @@ public class PointControle {
     /**
      * Définit la liste des points de contrôle du canevas droit.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param pointsDroite nouvelle liste des points de contrôle du canevas droit
      */
     public void setPointsDroite(List<Point> pointsDroite) {

@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /**
  * Classe Segment pour représenter et manipuler les segments dans un espace 2D.
  * 
@@ -19,7 +17,7 @@ public class Segment
 	/**
 	 * Constructeur qui permet d'initialiser le segment avec deux points.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @param a point initial a
 	 * @param b point final b
 	 */
@@ -32,7 +30,7 @@ public class Segment
 	/**
 	 * Getter qui retourne le point a.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @return point a
 	 */
 	public Point getA() { return a; }
@@ -40,7 +38,7 @@ public class Segment
 	/**
 	 * Getter qui retourne le point b.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @return point b
 	 */
 	public Point getB() { return b; }
@@ -48,7 +46,7 @@ public class Segment
 	/**
 	 * Setter qui remplace le point a par le point p passé en paramètre.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @param p nouveau point a
 	 */
 	public void setA(Point p) 
@@ -59,7 +57,7 @@ public class Segment
 	/**
 	 * Setter qui remplace le point b par le point p passé en paramètre.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @param p nouveau point b
 	 */	
 	public void setB(Point p) 
@@ -70,7 +68,7 @@ public class Segment
 	/**
 	 * Méthode qui permet de tester l'égalité entre le segment courant et un objet passé en paramètre.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @param o objet auquel on veut comparer le segment courant
 	 * @return booléen vrai si le segment courant et o sont conceptuellement égaux
 	 */	
@@ -87,7 +85,7 @@ public class Segment
 	/**
 	 * Getter qui renvoie la longueur du segment courant.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @return la longueur du segment courant sous forme d'un double
 	 */	
 	public double getLongueur() { return a.distance(b); }
@@ -95,7 +93,7 @@ public class Segment
 	/**
 	 * Méthode qui permet d'interpoler les segments s1 et s2 en le segment courant, en fonction du coefficient 0 < coeff < 1.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @param s1 segment 1
 	 * @param s2 segment 2
 	 * @param coeff coefficient d'interpolation
@@ -109,7 +107,7 @@ public class Segment
 	/**
 	 * Méthode qui spécifie le cast d'un segment en une chaîne de caractères.
 	 * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
 	 * @return la chaîne de caractères représentant le segment courant
 	 */
 	@Override

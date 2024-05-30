@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /**
  * see import javafx.geometry.Pos;
  * see import javafx.scene.control.Button;

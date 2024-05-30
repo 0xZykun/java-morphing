@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 import javax.imageio.*;
 import javax.imageio.metadata.*;
 import javax.imageio.stream.*;
@@ -112,7 +110,7 @@ public class GifSequenceWriter {
   /**
    * Méthode pour générer un GIF.
    * 
-   * @autor Anthony Garcia
+   * @author Anthony Garcia
    * @param images : LinkedList de BufferedImage, contenant les images
    * @param cheminSortie : String spécifiant le chemin du fichier GIF généré
    * @param dureeFrameMs : int spécifiant la durée entre les frames en millisecondes

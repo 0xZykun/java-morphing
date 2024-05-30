@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.canvas.Canvas;
  * see import javafx.scene.canvas.GraphicsContext;
@@ -40,7 +38,7 @@ public class TriangleControle {
     /**
      * Constructeur de la classe TriangleControle.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param app Instance de l'application principale
      */
     public TriangleControle(MorphingFx app) {
@@ -50,7 +48,7 @@ public class TriangleControle {
     /**
      * Redessine le canevas avec les points et les triangles.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param canevas Canvas à redessiner
      * @param points Liste des points à dessiner
      * @param image Image à dessiner sur le canevas
@@ -94,7 +92,7 @@ public class TriangleControle {
     /**
      * Dessine les lignes reliant les points sur le canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param gc Contexte graphique pour dessiner
      * @param points Liste des points à relier
      */
@@ -121,7 +119,7 @@ public class TriangleControle {
     /**
      * Dessine les points sur le canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param gc Contexte graphique pour dessiner
      * @param points Liste des points à dessiner
      */
@@ -149,7 +147,7 @@ public class TriangleControle {
     /**
      * Met à jour les triangles Delaunay et redessine le canevas.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void mettreAJourTrianglesEtDessiner() {
         if (app.getPointControle().getPointsGauche().size() >= 3) {
@@ -163,7 +161,7 @@ public class TriangleControle {
     /**
      * Génère les triangles Delaunay pour les points actuels.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void generateDelaunayTriangles() {
         listeTriangleDroite.clear();
@@ -207,7 +205,7 @@ public class TriangleControle {
     /**
      * Vérifie si un triangle a un sommet dans un coin de l'image.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param triangle Triangle à vérifier
      * @param width Largeur de l'image
      * @param height Hauteur de l'image
@@ -222,7 +220,7 @@ public class TriangleControle {
     /**
      * Getter pour la liste des triangles de l'image gauche.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return Liste des triangles de l'image gauche
      */
     public List<Triangle> getListeTriangleGauche() {
@@ -232,7 +230,7 @@ public class TriangleControle {
     /**
      * Setter pour la liste des triangles de l'image gauche.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param listeTriangleGauche Nouvelle liste des triangles de l'image gauche
      */
     public void setListeTriangleGauche(List<Triangle> listeTriangleGauche) {
@@ -242,7 +240,7 @@ public class TriangleControle {
     /**
      * Getter pour la liste des triangles de l'image droite.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return Liste des triangles de l'image droite
      */
     public List<Triangle> getListeTriangleDroite() {
@@ -252,7 +250,7 @@ public class TriangleControle {
     /**
      * Setter pour la liste des triangles de l'image droite.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param listeTriangleDroite Nouvelle liste des triangles de l'image droite
      */
     public void setListeTriangleDroite(List<Triangle> listeTriangleDroite) {

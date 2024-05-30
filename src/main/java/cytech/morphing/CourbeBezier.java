@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.canvas.GraphicsContext;
  * see import javafx.scene.paint.Color;
@@ -24,7 +22,7 @@ public class CourbeBezier {
     /**
      * Dessine une courbe de Bézier sur le contexte graphique donné.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param gc le contexte graphique sur lequel dessiner
      * @param points la liste des points de contrôle de la courbe
      * @param couleur la couleur de la courbe
@@ -74,7 +72,7 @@ public class CourbeBezier {
     /**
      * Ajoute les points de contrôle pour fermer la courbe de Bézier.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param pointsDir la liste des points de contrôle de la courbe à fermer
      */
     private static void fermerCourbe(List<Point> pointsDir){
@@ -98,7 +96,7 @@ public class CourbeBezier {
     /**
      * Ajoute les points de contrôle pour fermer les courbes de Bézier gauche et droite.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param pointsGauche la liste des points de contrôle de la courbe gauche
      * @param pointsDroite la liste des points de contrôle de la courbe droite
      */
@@ -113,7 +111,7 @@ public class CourbeBezier {
     /**
      * Fonction factorielle évaluée en n.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param n la valeur pour laquelle calculer la factorielle
      * @return la factorielle de n
      */
@@ -127,7 +125,7 @@ public class CourbeBezier {
 	/**
      * Calcule le coefficient binomial "i parmi n".
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param n le nombre total d'éléments
      * @param i le nombre d'éléments choisis
      * @return le coefficient binomial "i parmi n"
@@ -139,7 +137,7 @@ public class CourbeBezier {
 	/**
      * Calcule la valeur de la courbe de Bézier à l'instant t.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param courbe la liste des points de contrôle de la courbe
      * @param t l'instant pour lequel calculer la valeur
      * @return la valeur de la courbe à l'instant t
@@ -161,7 +159,7 @@ public class CourbeBezier {
 	/**
      * Calcule le pas à prendre pour tracer la courbe.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param courbe la liste des points de contrôle de la courbe
      * @return le pas à prendre pour tracer la courbe
      */
@@ -182,7 +180,7 @@ public class CourbeBezier {
 	/**
      * Donne la liste de points qui forme la courbe de Bézier sans doublon.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param points la liste des points de contrôle de la courbe
      * @return la liste des points formant la courbe de Bézier
      */

@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /**
  * Classe FieldMorphing pour gérer le morphing entre deux ensembles de segments.
  * 
@@ -39,7 +37,7 @@ public class FieldMorphing
     /**
      * Constructeur de FieldMorphing.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param src segments définis sur l'image source
      * @param dest segments définis sur l'image de destination
      * @param a réel positif qui croît avec la douceur de la déformation produite
@@ -68,7 +66,7 @@ public class FieldMorphing
 	/**
      * Constructeur de FieldMorphing avec des valeurs par défaut pour a, b et p.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param src segments définis sur l'image source
      * @param dest segments définis sur l'image de destination
      */
@@ -80,7 +78,7 @@ public class FieldMorphing
 	/**
      * Getter pour le paramètre a.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return paramètre a
      */
 	public double getA() { return a; }
@@ -88,7 +86,7 @@ public class FieldMorphing
 	/**
      * Setter pour le paramètre a.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param a nouvelle valeur de a
      */
 	public void setA(double a) { this.a = a; }
@@ -96,7 +94,7 @@ public class FieldMorphing
 	/**
      * Getter pour le paramètre b.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return paramètre b
      */
 	public double getB() { return b; }
@@ -104,7 +102,7 @@ public class FieldMorphing
 	/**
      * Setter pour le paramètre b.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param b nouvelle valeur de b
      */
 	public void setB(double b) { this.b = b; }
@@ -112,7 +110,7 @@ public class FieldMorphing
 	/**
      * Getter pour le paramètre p.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return paramètre p
      */
 	public double getP() { return p; }
@@ -120,7 +118,7 @@ public class FieldMorphing
 	/**
      * Setter pour le paramètre p.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param p nouvelle valeur de p
      */
 	public void setP(double p) { this.p = p; }
@@ -128,7 +126,7 @@ public class FieldMorphing
 	/**
      * Getter pour le ième segment de s_src, le tableau des segments de l'image source.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param i index dans s_src du segment qui sera retourné
      * @return ième segment de s_src
      */
@@ -140,7 +138,7 @@ public class FieldMorphing
 	/**
      * Getter pour le ième segment de s_dest, le tableau des segments de l'image de destination.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param i index dans s_dest du segment qui sera retourné
      * @return ième segment de s_dest
      */
@@ -152,7 +150,7 @@ public class FieldMorphing
 	/**
      * Calcule un scalaire U qui intervient dans le calcul de déformation de l'image par rapport aux segments.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param p point sur l'image de destination dont on veut déterminer l'associé sur l'image source
      * @param i index dans s_dest du segment concerné
      * @return valeur du scalaire U
@@ -166,7 +164,7 @@ public class FieldMorphing
 	/**
      * Calcule un scalaire V qui intervient dans le calcul de déformation de l'image par rapport aux segments.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param p point sur l'image de destination dont on veut déterminer l'associé sur l'image source
      * @param i index dans s_dest du segment concerné
      * @return valeur du scalaire V
@@ -180,7 +178,7 @@ public class FieldMorphing
 	/**
      * Détermine le point sur l'image source associé au point p sur l'image intermédiaire à l'étape coeff de la transformation.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param p point sur l'image intermédiaire dont on veut déterminer l'associé sur l'image source
      * @param coeff étape de la transformation
      * @return point associé à p sur l'image source
@@ -217,7 +215,7 @@ public class FieldMorphing
 	/**
      * Détermine le point sur l'image de destination associé au point p sur l'image intermédiaire à l'étape coeff de la transformation.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param p point sur l'image intermédiaire dont on veut déterminer l'associé sur l'image de destination
      * @param coeff étape de la transformation
      * @return point associé à p sur l'image de destination
@@ -254,7 +252,7 @@ public class FieldMorphing
 	/**
      * Modifie l'ImageBit inter pour représenter l'étape coeff du morphing de src vers dest selon les paramètres de l'objet FieldMorphing présent.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param src ImageBit de l'image initiale
      * @param dest ImageBit de l'image finale
      * @param inter ImageBit de l'image intermédiaire

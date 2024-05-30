@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import java.util.ArrayList;
  * see import java.util.List;
@@ -25,7 +23,7 @@ public class Point {
     /**
      * Constructeur qui permet d'initialiser le point.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param x Coordonnée x du point
      * @param y Coordonnée y du point
      */
@@ -38,7 +36,7 @@ public class Point {
 	/**
      * Getter qui retourne la coordonnée x du point.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @return retourne la coordonnée x du point
      */
 	public double getX() {
@@ -49,7 +47,7 @@ public class Point {
 	/**
      * Setter qui remplace la coordonnée x par newx.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param newx Nouvelle coordonnée x du point
      */
 	public void setX(double newx) {
@@ -60,7 +58,7 @@ public class Point {
 	/**
      * Getter qui retourne la coordonnée y du point.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @return retourne la coordonnée y du point
      */
 	public double getY() {
@@ -71,7 +69,7 @@ public class Point {
 	/**
      * Setter qui remplace la coordonnée y par newy.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param newy Nouvelle coordonnée y du point
      */
 	public void setY(double newy) {
@@ -82,7 +80,7 @@ public class Point {
 	/**
      * Méthode qui vérifie si deux points sont égaux.
      * 
-	 * @autor Marc DJOLE
+	 * @author Marc DJOLE
      * @param obj Objet de type Object
      * @return retourne vrai si les deux points sont égaux, faux sinon
      */
@@ -99,7 +97,7 @@ public class Point {
 	/**
      * Méthode qui calcule la distance euclidienne entre deux points.
      * 
-	 * @autor Marc DJOLE
+	 * @author Marc DJOLE
      * @param x2 Coordonnée x du deuxième point
      * @param y2 Coordonnée y du deuxième point
      * @return Retourne la distance entre ces deux points
@@ -114,7 +112,7 @@ public class Point {
 	/**
      * Méthode qui calcule la distance euclidienne entre deux points.
      * 
-	 * @autor Marc DJOLE
+	 * @author Marc DJOLE
      * @param p Point jusqu'auquel on veut calculer la distance
      * @return Retourne la distance entre ces deux points
      */
@@ -127,7 +125,7 @@ public class Point {
 	/**
      * Méthode qui interpole deux points et les stocke dans le point courant.
      * 
-	 * @autor Marc DJOLE
+	 * @author Marc DJOLE
      * @param p1 Point 1
      * @param p2 Point 2
      * @param coeff Coefficient d'interpolation
@@ -140,7 +138,7 @@ public class Point {
 	/**
      * Méthode qui additionne deux points.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param p1 Point 1
      * @param p2 Point 2
      * @return résultat de l'addition
@@ -153,7 +151,7 @@ public class Point {
 	/**
      * Méthode qui soustrait p2 à p1.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param p1 Point 1
      * @param p2 Point 2
      * @return résultat de la soustraction
@@ -166,7 +164,7 @@ public class Point {
 	/**
      * Calcule la norme du point.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @return la norme du point
      */
 	public double norme2()
@@ -177,7 +175,7 @@ public class Point {
 	/**
      * Méthode qui calcule le produit scalaire entre deux points.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param p1 Point 1
      * @param p2 Point 2
      * @return produit scalaire des points 1 et 2
@@ -190,7 +188,7 @@ public class Point {
 	/**
      * Méthode qui calcule un vecteur orthogonal au vecteur p1p2, de même norme que p1p2.
      * 
-	 * @autor Marc DJOLE
+	 * @author Marc DJOLE
      * @param p1 Point 1
      * @param p2 Point 2
      * @return point qui contient le vecteur orthogonal à p1p2
@@ -209,7 +207,7 @@ public class Point {
 	/**
      * Méthode qui vérifie si un point est situé dans un des coins de l'image.
      * 
-	 * @autor Marc DJOLE
+	 * @author Marc DJOLE
      * @param width Largeur de l'image
      * @param height Hauteur de l'image
      * @return Retourne vrai si le point est situé dans un des coins de l'image
@@ -225,7 +223,7 @@ public class Point {
 	/**
      * Méthode qui vérifie si un point est situé dans un des coins de l'image.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param width Largeur de l'image
      * @param height Hauteur de l'image
      * @return Retourne vrai si le point est situé dans un des coins de l'image
@@ -241,7 +239,7 @@ public class Point {
 	/**
      * Méthode qui vérifie si le point courant appartient à la forme définie par une liste de points.
      * 
-	 * @autor Thomas BEAUSSART
+	 * @author Thomas BEAUSSART
      * @param points Liste des points qui forment le contour de l'image
      * @return true si le point appartient à l'image, false sinon
      */
@@ -275,7 +273,7 @@ public class Point {
 	/**
      * Méthode qui calcule la distance depuis le point courant jusqu'à un segment en paramètre.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param s segment jusqu'auquel on veut calculer la distance
      * @return double qui contient la distance
      */
@@ -306,7 +304,7 @@ public class Point {
 	/**
      * Méthode qui multiplie un point par un scalaire.
      * 
-	 * @autor Ruben PETTENG NGONGANG
+	 * @author Ruben PETTENG NGONGANG
      * @param p Point que l'on veut mettre à l'échelle
      * @param x scalaire par lequel multiplier
      * @return point résultat de la multiplication de p par x

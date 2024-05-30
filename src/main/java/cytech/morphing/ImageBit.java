@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.embed.swing.SwingFXUtils;
  * see import javafx.scene.image.*;
@@ -41,7 +39,7 @@ public class ImageBit {
     /**
      * Constructeur qui permet d'initialiser l'image.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param chemin chemin de l'image dans le répertoire
      */
     public ImageBit(String chemin) {
@@ -60,7 +58,7 @@ public class ImageBit {
     /**
      * Constructeur supplémentaire pour initialiser ImageBit directement avec un WritableImage.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param writableImage image à utiliser pour initialiser
      */
     public ImageBit(WritableImage writableImage) {
@@ -78,7 +76,7 @@ public class ImageBit {
     /**
      * Méthode qui permet de récupérer la couleur d'un point de l'image.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param x coordonnée x du point dont on doit récupérer la couleur
      * @param y coordonnée y du point dont on doit récupérer la couleur
      * @return retourne la couleur du point sous forme de tableau de l'intensité des couleurs primaires
@@ -96,7 +94,7 @@ public class ImageBit {
     /**
      * Méthode qui permet de modifier la couleur d'un point.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param x coordonnée x du point dont on doit modifier la couleur
      * @param y coordonnée y du point dont on doit modifier la couleur
      * @param r pourcentage de rouge
@@ -120,7 +118,7 @@ public class ImageBit {
     /**
      * Méthode qui renvoie la hauteur de l'image.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return retourne la hauteur de l'image
      */
     public int getHeight() {
@@ -130,7 +128,7 @@ public class ImageBit {
     /**
      * Méthode qui renvoie la largeur de l'image.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return retourne la largeur de l'image
      */
     public int getWidth() {
@@ -141,7 +139,7 @@ public class ImageBit {
     /**
      * Méthode qui crée une instance graphique de l'image et la renvoie.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return retourne une instance graphique de l'image
      */
     public ImageView  genererImage(){
@@ -152,7 +150,7 @@ public class ImageBit {
     /**
      * Méthode qui réalise une copie profonde de l'objet ImageBit.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return une nouvelle instance de ImageBit avec les mêmes données d'image
      */
     public ImageBit copieProfonde() {
@@ -163,7 +161,7 @@ public class ImageBit {
     /**
      * Convertit l'objet ImageBit en BufferedImage.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return l'image convertie au format BufferedImage
      */
     public BufferedImage toBufferedImage() {
@@ -173,7 +171,7 @@ public class ImageBit {
     /**
      * Méthode qui renvoie l'image au format WritableImage.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return l'image au format WritableImage
      */
     public WritableImage getImg() {
@@ -183,7 +181,7 @@ public class ImageBit {
     /**
      * Méthode qui renvoie la couleur de la forme.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param couleurFond couleur du fond
      * @return couleur de la forme
      */

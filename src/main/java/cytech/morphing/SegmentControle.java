@@ -1,6 +1,4 @@
-package cytech.morphing;
-
-/*
+/* 
  * see import javafx.scene.canvas.Canvas;
  * see import javafx.scene.canvas.GraphicsContext;
  * see import javafx.scene.image.Image;
@@ -23,7 +21,7 @@ import java.util.List;
 /**
  * Classe SegmentControle pour gérer les segments sur les canevas.
  * 
- * @autor Ruben PETTENG NGONGANG
+ * @author Ruben PETTENG NGONGANG
  */
 public class SegmentControle {
     /**
@@ -54,7 +52,7 @@ public class SegmentControle {
     /**
      * Constructeur pour initialiser SegmentControle avec l'application principale.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param app l'application principale MorphingFx
      */
     public SegmentControle(MorphingFx app) {
@@ -64,7 +62,7 @@ public class SegmentControle {
     /**
      * Configure les événements de souris pour les segments sur le canevas.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param canevas le canevas à configurer
      * @param segments liste des segments pour ce canevas
      * @param canevasOppose le canevas opposé à configurer
@@ -121,7 +119,7 @@ public class SegmentControle {
     /**
      * Redessine les segments sur le canevas.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param canevas le canevas à redessiner
      * @param segments liste des segments à dessiner
      * @param image image de fond à dessiner
@@ -142,7 +140,7 @@ public class SegmentControle {
     /**
      * Dessine les segments sur le GraphicsContext.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param gc le GraphicsContext sur lequel dessiner
      * @param segments liste des segments à dessiner
      */
@@ -169,7 +167,7 @@ public class SegmentControle {
     /**
      * Ajoute un nouveau segment.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      */
     public void ajouterSegment() {
         double largeur = app.getImageLoader().getCanevasGauche().getWidth();
@@ -191,7 +189,7 @@ public class SegmentControle {
     /**
      * Supprime le dernier segment ajouté.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      */
     public void supprimerSegment() {
         if (!segmentsDroite.isEmpty()) {
@@ -207,7 +205,7 @@ public class SegmentControle {
     /**
      * Trouve l'index du point de segment le plus proche des coordonnées spécifiées.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param x coordonnée x à vérifier
      * @param y coordonnée y à vérifier
      * @param segments liste des segments
@@ -230,7 +228,7 @@ public class SegmentControle {
     /**
      * Efface tous les segments des canevas.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      */
     public void clearSegments() {
         segmentsGauche.clear();
@@ -243,7 +241,7 @@ public class SegmentControle {
     /**
      * Retourne la liste des segments du canevas gauche.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return liste des segments du canevas gauche
      */
     public List<Segment> getSegmentsGauche() {
@@ -253,7 +251,7 @@ public class SegmentControle {
     /**
      * Définit la liste des segments du canevas gauche.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param segmentsGauche nouvelle liste des segments du canevas gauche
      */
     public void setSegmentsGauche(List<Segment> segmentsGauche) {
@@ -263,7 +261,7 @@ public class SegmentControle {
     /**
      * Retourne la liste des segments du canevas droit.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @return liste des segments du canevas droit
      */
     public List<Segment> getSegmentsDroite() {
@@ -273,7 +271,7 @@ public class SegmentControle {
     /**
      * Définit la liste des segments du canevas droit.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param segmentsDroite nouvelle liste des segments du canevas droit
      */
     public void setSegmentsDroite(List<Segment> segmentsDroite) {
@@ -283,7 +281,7 @@ public class SegmentControle {
     /**
      * Réinitialise le point temporaire utilisé pour créer un segment.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      */
     public void resetPointTemp() {
         pointTemp = null;

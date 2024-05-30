@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.animation.KeyFrame;
  * see import javafx.animation.Timeline;
@@ -222,7 +220,7 @@ public class MorphingTask {
     /**
      * Remplit la forme sur l'image intermédiaire avec la couleur appropriée.
      * 
-     * @autor Thomas BEAUSSART
+     * @author Thomas BEAUSSART
      * @param largeur Largeur de l'image
      * @param hauteur Hauteur de l'image
      * @param couleurForme Couleur de la forme
@@ -337,7 +335,7 @@ public class MorphingTask {
     /**
      * Effectue le morphing de l'image en utilisant la méthode 4 (segments).
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param segementsGauche Segments de l'image gauche
      * @param segmentsDroite Segments de l'image droite
      * @param imageGauche Image de départ
@@ -406,7 +404,7 @@ public class MorphingTask {
     /**
      * Convertit une liste de segments en tableau.
      * 
-     * @autor Ruben PETTENG NGONGANG
+     * @author Ruben PETTENG NGONGANG
      * @param segmentsList Liste de segments
      * @return Tableau de segments
      */
@@ -604,7 +602,7 @@ public class MorphingTask {
 
         Timeline chronologie = new Timeline();
         chronologie.setCycleCount(Timeline.INDEFINITE);
-        chronologie.setAutoReverse(false);
+        chronologie.setauthoreverse(false);
 
         for (int i = 0; i < nombreEtapes; i++) {
             final Image image = app.getImagesIntermediaires().get(i).getImg();

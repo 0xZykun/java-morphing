@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.control.Button;
  * see import javafx.scene.control.Slider;
@@ -51,7 +49,7 @@ public class ImageViewer {
     /**
      * Constructeur pour initialiser ImageViewer avec l'application principale.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @param app l'application principale MorphingFx
      */
     public ImageViewer(MorphingFx app) {
@@ -85,7 +83,7 @@ public class ImageViewer {
     /**
      * Crée la visionneuse d'images pour l'interface utilisateur.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return un HBox contenant la visionneuse d'images
      */
     public HBox creerVisionneuseImage() {
@@ -113,7 +111,7 @@ public class ImageViewer {
     /**
      * Met à jour le curseur de la visionneuse d'images.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void mettreAJourSlider() {
         int nombreImages = app.getImagesIntermediaires().size();
@@ -129,7 +127,7 @@ public class ImageViewer {
     /**
      * Actualise l'état des boutons de la visionneuse.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void actualiserEtatBoutonsVisionneuse() {
         boutonPrecedent.setDisable(app.getIndexEtapeCourante() == 0);
@@ -139,7 +137,7 @@ public class ImageViewer {
     /**
      * Actualise la visionneuse d'images.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     public void actualiserVisionneuseImage() {
         if (!app.getImagesIntermediaires().isEmpty()) {
@@ -156,7 +154,7 @@ public class ImageViewer {
     /**
      * Redimensionne l'image en utilisant les dimensions de la scène.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      */
     private void redimensionnerImageView() {
         imageView.setFitWidth(app.getLargeurScene() / 2.2);
@@ -167,7 +165,7 @@ public class ImageViewer {
     /**
      * Retourne la visionneuse d'images.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return la visionneuse d'images
      */
     public ImageView getImageView() {
@@ -177,7 +175,7 @@ public class ImageViewer {
     /**
      * Retourne le curseur de la visionneuse.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le curseur de la visionneuse
      */
     public Slider getSlider() {
@@ -187,7 +185,7 @@ public class ImageViewer {
     /**
      * Retourne le bouton pour aller à l'image précédente.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le bouton pour aller à l'image précédente
      */
     public Button getBoutonPrecedent() {
@@ -197,7 +195,7 @@ public class ImageViewer {
     /**
      * Retourne le bouton pour aller à l'image suivante.
      * 
-     * @autor Mattéo REYNE
+     * @author Mattéo REYNE
      * @return le bouton pour aller à l'image suivante
      */
     public Button getBoutonSuivant() {

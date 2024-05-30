@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.canvas.Canvas;
  * import javafx.scene.canvas.GraphicsContext;
@@ -165,8 +163,8 @@ public class ImageLoader {
      * Crée les contrôles d'image pour l'interface utilisateur.
      * 
      * @author Anthony GARCIA
-     * @param canevas le canevas sur lequel dessiner l'image
-     * @param estGauche indique si le canevas est à gauche
+     * @param Chemin le chemin de l'image
+     * @param index indique si le canevas est à gauche
      * @return un BorderPane contenant les contrôles d'image
      */
     public void chargerImage(String chemin, int index) {

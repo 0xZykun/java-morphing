@@ -1,5 +1,3 @@
-package cytech.morphing;
-
 /*
  * see import javafx.scene.paint.Color;
  * see import javafx.scene.shape.Circle;
@@ -39,7 +37,7 @@ public class Triangle {
     /**
      * Constructeur qui permet d'initialiser le triangle.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param a Un sommet du triangle
      * @param b Un sommet du triangle
      * @param c Un sommet du triangle
@@ -54,7 +52,7 @@ public class Triangle {
 	/**
      * Getter qui retourne le sommet a.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne le Point a
      */
 	public Point getA() {
@@ -64,7 +62,7 @@ public class Triangle {
 	/**
      * Setter qui remplace le sommet a par newa.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param newa Sommet de remplacement
      */
 	public void setA(Point newa) {
@@ -75,7 +73,7 @@ public class Triangle {
 	/**
      * Getter qui retourne le sommet b.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne le Point b
      */
 	public Point getB() {
@@ -85,7 +83,7 @@ public class Triangle {
 	/**
      * Setter qui remplace le sommet b par newb.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param newb Sommet de remplacement
      */
 	public void setB(Point newb) {
@@ -96,7 +94,7 @@ public class Triangle {
 	/**
      * Getter qui retourne le sommet c.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne le Point c
      */
 	public Point getC() {
@@ -106,7 +104,7 @@ public class Triangle {
 	/**
      * Setter qui remplace le sommet c par newc.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param newc Sommet de remplacement
      */
 	public void setC(Point newc) {
@@ -117,7 +115,7 @@ public class Triangle {
 	/**
      * Méthode qui interpole deux triangles et renvoie le résultat.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param t Coefficient d'interpolation
      * @param p Deuxième triangle de l'interpolation
      * @return Retourne le triangle résultat de l'interpolation
@@ -132,7 +130,7 @@ public class Triangle {
 	/**
      * Méthode qui calcule les coordonnées du cercle inscrit au triangle et les renvoie.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne un tableau qui contient les coordonnées du cercle circonscrit et son rayon
      */
 	public double[] cercleInscrit(){
@@ -167,7 +165,7 @@ public class Triangle {
 	/**
      * Méthode qui crée une instance graphique du triangle et la renvoie.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne une instance graphique du triangle
      */
 	public Polygon tracerTriangle() {
@@ -189,7 +187,7 @@ public class Triangle {
 	/**
      * Méthode qui crée une instance graphique du cercle inscrit au triangle.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne une instance graphique du cercle inscrit au triangle
      */
 	public Circle tracerCercleInscrit() {
@@ -206,7 +204,7 @@ public class Triangle {
 	/**
      * Méthode qui teste si un point appartient au cercle circonscrit à un triangle.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param p Point dont on doit tester l'appartenance au cercle inscrit au triangle
      * @return Retourne vrai si le point appartient au cercle, faux sinon
      */
@@ -224,7 +222,7 @@ public class Triangle {
 	/**
      * Méthode qui calcule l'aire du triangle.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Retourne l'aire du triangle
      */
 	public double aire() {
@@ -244,7 +242,7 @@ public class Triangle {
 	/**
      * Méthode qui calcule les coordonnées barycentriques d'un point.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param p Point dont on doit calculer les coordonnées barycentriques
      * @return Retourne les coordonnées barycentriques sous forme de tableau
      */
@@ -266,7 +264,7 @@ public class Triangle {
 	/**
      * Méthode qui teste si un point appartient au triangle.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param p Point dont on doit tester l'appartenance au triangle
      * @return Retourne vrai si le point appartient au triangle, faux sinon
      */
@@ -288,7 +286,7 @@ public class Triangle {
 	/**
      * Méthode toString pour afficher les coordonnées des sommets du triangle.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @return Chaîne représentant les coordonnées des sommets du triangle
      */
 	@Override
@@ -299,7 +297,7 @@ public class Triangle {
 	/**
      * Méthode qui vérifie si un des sommets du triangle est situé dans un coin de l'image.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param width Largeur de l'image
      * @param heigth Hauteur de l'image
      * @return Retourne vrai si un sommet est situé dans un coin, faux sinon
@@ -311,7 +309,7 @@ public class Triangle {
 	/**
      * Méthode de copie profonde pour une liste de triangles.
      * 
-     * @autor Marc DJOLE
+     * @author Marc DJOLE
      * @param listeTriangles Liste de triangles à copier
      * @return Copie profonde de la liste de triangles
      */
